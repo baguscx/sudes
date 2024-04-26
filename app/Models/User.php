@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function detail_users(){
+        return $this->hasOne('App\Models\DetailUser', 'users_id');
+    }
 }

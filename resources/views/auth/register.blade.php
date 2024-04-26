@@ -74,9 +74,9 @@
                 </div>
             </div>
 
-            <x-primary-button class="btn btn-primary">
+            <x-button.primary-button class="btn btn-primary">
                 {{ __('Register') }}
-            </x-primary-button>
+            </x-button.primary-button>
 
             <div class="mt-3">
                 <a class="" href="{{ route('login') }}">

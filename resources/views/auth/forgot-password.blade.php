@@ -35,10 +35,10 @@
                     use code for form submit
                     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
                 -->
-                    <x-primary-button
+                    <x-button.primary-button
                         class="btn btn-primary btn-lg btn-block"
                         >{{ __('Reset') }}
-                    </x-primary-button>
+                    </x-button.primary-button>
                 </div>
             </div>
             <div class="col-2">

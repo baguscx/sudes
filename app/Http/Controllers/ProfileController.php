@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DetailUserRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UserRequest;
+use App\Models\DetailUser;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
 {
@@ -24,15 +30,42 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $userRequest, DetailUserRequest $detailUserRequest): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $dataUser = $userRequest->all();
+        $dataDetailUser = $detailUserRequest->all();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $get_photo = DetailUser::where('users_id', Auth::user()->id)->first();
+
+        //delete old file from storage
+        if(isset($dataDetailUser['photo'])){
+            $data = 'storage/'.$get_photo['photo'];
+            if (File::exists($data)) {
+                File::delete($data);
+            } else {
+                File::delete('storage/app/public/'.$get_photo['photo']);
+            }
         }
 
-        $request->user()->save();
+        //store file to storage
+        if(isset($dataDetailUser['photo'])){
+            $dataDetailUser['photo'] = $detailUserRequest->file('photo')->store('assets/photo', 'public');
+        }
+
+        $user = User::findOrFail(Auth::user()->id);
+        // $user->assignRole($detailUserRequest->role);
+
+                // Perbarui peran pengguna jika diminta dalam request
+        if ($detailUserRequest->has('role')) {
+            $role = Role::where('name', $detailUserRequest->role)->first();
+            if ($role) {
+                $user->syncRoles([$role->id]);
+            }
+        }
+        $user->update($dataUser);
+
+        $detailUser = DetailUser::where('users_id', Auth::user()->id)->firstOrFail();
+        $detailUser->update($dataDetailUser);
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

@@ -1,13 +1,13 @@
 <x-app-layout>
-    <x-slot name="title"> Profile </x-slot>
+    <x-slot name="title"> {{ $metapage['title'] }} </x-slot>
     <div class="xs-pd-20-10 pd-ltr-20">
         <div class="title pb-20">
-            <h2 class="h3 mb-0">Profile</h2>
+            <h2 class="h3 mb-0">{{ $metapage['title'] }}</h2>
         </div>
         <div class="pd-20 card-box mb-30">
             <div class="wizard-content">
-                <form method="post" class="tab-wizard wizard-circle wizard clearfix" action="{{ route('profile.update') }}" enctype="multipart/form-data">
-                    @method('PATCH')
+                <form method="post" class="tab-wizard wizard-circle wizard clearfix" action="{{ $metapage['url'] }}" enctype="multipart/form-data">
+                    @method( $metapage['method'] )
                     @csrf
                     <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false">
                         <div class="row">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-4">
-                            <x-button.primary-button class="mt-2">Save</x-button.primary-button>
+                            <x-button.primary-button class="mt-2">{{ $metapage['button'] }}</x-button.primary-button>
                             @if (session('status') === 'profile-updated')
                                 <p
                                     x-data="{ show: true }"

@@ -67,9 +67,9 @@
                     use code for form submit
                     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
                 -->
-                    <x-primary-button
+                    <x-button.primary-button
                         class="btn btn-primary btn-lg btn-block"
-                        >{{ __('Log in') }}</x-primary-button>
+                        >{{ __('Log in') }}</x-button.primary-button>
                 </div>
                 <div
                     class="font-16 weight-600 pt-10 pb-10 text-center"
