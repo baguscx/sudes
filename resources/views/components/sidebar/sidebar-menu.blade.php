@@ -29,6 +29,11 @@
             <x-slot name="icon">micon bi bi-house</x-slot>
             <x-slot name="title">Home</x-slot>
         </x-menu.sidebar-menu-item>
+        <x-menu.sidebar-menu-item>
+            <x-slot name="link">{{route('warga.surat.index')}}</x-slot>
+            <x-slot name="icon">micon bi bi-house</x-slot>
+            <x-slot name="title">Surat</x-slot>
+        </x-menu.sidebar-menu-item>
         @endif
     </ul>
 </div>

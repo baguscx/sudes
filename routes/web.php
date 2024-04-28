@@ -58,6 +58,7 @@ Route::middleware(['auth', 'verified', 'role:warga'])->group(function () {
         'update' => 'warga.surat.update',
         'destroy' => 'warga.surat.destroy'
     ]);
+    Route::get('warga/surat/pdf', [SuratController::class, 'pdf'])->name('warga.surat.pdf');
 });
 
 require __DIR__.'/auth.php';
