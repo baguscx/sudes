@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\WargaDashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Surat\DetailSurat;
+use App\Models\Surat\PengajuanSurat;
+use App\Models\SuratKematian;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 // use Spatie\LaravelPdf\Facades\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +23,7 @@ class SuratController extends Controller
      */
     public function index()
     {
-        //
+        return view('warga.surat.index');
     }
 
     /**
@@ -34,7 +39,61 @@ class SuratController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $pengajuan = PengajuanSurat::create(
+            [
+                'users_id' => Auth::user()->id,
+                'tanggal_pengajuan' => date('Y-m-d'),
+                'status' => 'Diajukan',
+            ]);
+
+            if($request->jenis_surat == 'sktm'){
+                DetailSurat::create([
+                    'users_id' => Auth::user()->id,
+                    'pengajuan_surat_id' => $pengajuan->id,
+                    'nama' => $request->nama,
+                    'nik' => $request->nik,
+                    'gender' => $request->gender,
+                    'tempat_lahir' => $request->tempat_lahir,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'warganegara' => $request->warganegara,
+                    'agama' => $request->agama,
+                    'pekerjaan' => $request->pekerjaan,
+                    'status_pernikahan' => $request->status_pernikahan,
+                    'tujuan' => $request->tujuan,
+                    'alamat' => $request->alamat,
+                    'jenis_surat' => 'Surat Keterangan Tidak Mampu',
+                    'kode_surat' => 'sktm',
+                    'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
+                ]);
+            }
+
+            if($request->jenis_surat == 'skk'){
+                DetailSurat::create([
+                    'users_id' => Auth::user()->id,
+                    'pengajuan_surat_id' => $pengajuan->id,
+                    'nama' => $request->nama,
+                    'bin' => $request->bin,
+                    'nik' => $request->nik,
+                    'gender' => $request->gender,
+                    'tempat_lahir' => $request->tempat_lahir,
+                    'tanggal_lahir' => $request->tanggal_lahir,
+                    'warganegara' => $request->warganegara,
+                    'agama' => $request->agama,
+                    'status_pernikahan' => $request->status_pernikahan,
+                    'pekerjaan' => $request->pekerjaan,
+                    'alamat' => $request->alamat,
+                    'tanggal_meninggal' => $request->tanggal_meninggal,
+                    'jam_meninggal' => $request->jam_meninggal,
+                    'tempat_meninggal' => $request->tempat_meninggal,
+                    'sebab_meninggal' => $request->sebab_meninggal,
+                    'jenis_surat' => 'Surat Keterangan Kematian',
+                    'kode_surat' => 'skk',
+                    'berkas' => $request->file('berkas')->store('assets/berkas', 'public'),
+                ]);
+            }
+
+        return redirect()->route('warga.surat.index');
     }
 
     /**
@@ -69,50 +128,22 @@ class SuratController extends Controller
         //
     }
 
-    public function pdf()
+    public function pdf(String $id)
     {
-        $user = Auth::user();
-        $pdf = Pdf::loadView('warga.surat.pdf', compact('user'))->setPaper('a4', 'potrait');
-        $pdfPath = public_path('invoice.pdf');
-        $pdf->save($pdfPath);
-        return response()->file($pdfPath, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="invoice.pdf"',
-        ]);
+        Carbon::setLocale('id');
+        $list = DetailSurat::where('id', $id)->first();
+        $user = User::where('id', $list->users_id)->first();
+        $pdf = Pdf::loadView('warga.surat.pdf', compact('list', 'user'))->setPaper('a4', 'potrait');
+        return $pdf->download('surat.pdf');
 
+        // return view('warga.surat.pdf', compact('user'));
+    }
 
-    // $data = [
-    //     [
-    //         'quantity' => 1,
-    //         'description' => '1 Year Subscription',
-    //         'price' => '129.00'
-    //     ]
-    // ];
+    public function history_surat()
+    {
+        // dd($list);
+        $pengajuanSurat = PengajuanSurat::where('users_id', Auth::user()->id)->with('detail_surats')->get();
 
-    // $pdf = Pdf::loadView('warga.surat.doc', ['data' => $data]);
-
-    // return $pdf->download();
-
-
-    // $pdf = Pdf::loadView('warga.surat.pdf', compact('user'));
-
-    // return $pdf->stream();
-
-        // // instantiate and use the dompdf class
-        // $dompdf = new Dompdf();
-        // $dompdf->loadHtml(view('warga.surat.pdf'));
-
-        // // (Optional) Setup the paper size and orientation
-        // $dompdf->setPaper('A4', 'landscape');
-
-        // // Render the HTML as PDF
-        // $dompdf->render();
-
-        // // Output the generated PDF to Browser
-        // $dompdf->stream();
-        // $mpdf = new \Mpdf\Mpdf();
-        // $mpdf->WriteHTML(view('warga.surat.pdf'));
-        // $mpdf->Output('asu.pdf', 'D');
-        return view('warga.surat.pdf', compact('user'));
+        return view('warga.surat.history', compact( 'pengajuanSurat'));
     }
 }

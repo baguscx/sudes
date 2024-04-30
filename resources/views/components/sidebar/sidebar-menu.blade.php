@@ -1,39 +1,27 @@
 <div class="sidebar-menu">
     <ul id="accordion-menu">
         @if (auth()->user()->hasRole('admin'))
-        <x-menu.sidebar-menu-item>
-            <x-slot name="link">{{route('dashboard')}}</x-slot>
-            <x-slot name="icon">micon bi bi-house</x-slot>
-            <x-slot name="title">Home</x-slot>
-        </x-menu.sidebar-menu-item>
-        <x-menu.sidebar-menu-item>
-            <x-slot name="link">{{route('admin.users.index')}}</x-slot>
-            <x-slot name="icon">micon bi bi-archive</x-slot>
-            <x-slot name="title">Users</x-slot>
-        </x-menu.sidebar-menu-item>
+        <x-menu.sidebar-menu-item class="no-arrow" link="{{route('admin.dashboard')}}" icon="micon bi bi-house" title="Home"/>
+        <x-menu.sidebar-menu-item class="no-arrow" link="{{route('admin.users.index')}}" icon="micon bi bi-archive" title="Users"/>
+
         @elseif (auth()->user()->hasRole('kades'))
-        <x-menu.sidebar-menu-item>
-            <x-slot name="link">{{route('kades.dashboard')}}</x-slot>
-            <x-slot name="icon">micon bi bi-house</x-slot>
-            <x-slot name="title">Home</x-slot>
-        </x-menu.sidebar-menu-item>
+        <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.dashboard')}}" icon="micon bi bi-house" title="Home"/>
+
         @elseif (auth()->user()->hasRole('staff'))
-        <x-menu.sidebar-menu-item>
-            <x-slot name="link">{{route('staff.dashboard')}}</x-slot>
-            <x-slot name="icon">micon bi bi-house</x-slot>
-            <x-slot name="title">Home</x-slot>
-        </x-menu.sidebar-menu-item>
+        <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.dashboard')}}" icon="micon bi bi-house" title="Home"/>
+
         @elseif (auth()->user()->hasRole('warga'))
-        <x-menu.sidebar-menu-item>
-            <x-slot name="link">{{route('warga.dashboard')}}</x-slot>
-            <x-slot name="icon">micon bi bi-house</x-slot>
-            <x-slot name="title">Home</x-slot>
-        </x-menu.sidebar-menu-item>
-        <x-menu.sidebar-menu-item>
-            <x-slot name="link">{{route('warga.surat.index')}}</x-slot>
-            <x-slot name="icon">micon bi bi-house</x-slot>
-            <x-slot name="title">Surat</x-slot>
-        </x-menu.sidebar-menu-item>
+        <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.dashboard')}}" icon="micon bi bi-house" title="Home"/>
+        <li class="dropdown">
+            <a href="javascript:;" class="dropdown-toggle">
+                <span class="micon bi bi-file-earmark-text"></span
+                ><span class="mtext">Surat</span>
+            </a>
+            <ul class="submenu">
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.surat.index')}}" icon="" title="Buat Surat" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.surat.history')}}" icon="" title="Riwayat" />
+            </ul>
+        </li>
         @endif
     </ul>
 </div>

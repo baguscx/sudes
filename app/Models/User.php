@@ -49,4 +49,10 @@ class User extends Authenticatable
     public function detail_users(){
         return $this->hasOne('App\Models\DetailUser', 'users_id');
     }
+    public function detail_surats(){
+        return $this->hasMany('App\Models\Surat\DetailSurat', 'users_id');
+    }
+    public function pengajuan_surats(){
+        return $this->hasMany('App\Models\Surat\PengajuanSurat', 'users_id');
+    }
 }
