@@ -64,6 +64,7 @@ Route::middleware(['auth', 'verified', 'role:warga'])->group(function () {
 });
 Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
     Route::get('staff', [StaffController::class, 'dashboard'])->name('staff.dashboard');
+    Route::put('staff/pengajuan/{id}', [StaffController::class, 'konfirmasi'])->name('staff.pengajuan.confirm');
     Route::resource('staff/pengajuan', StaffController::class)->names([
         'index' => 'staff.pengajuan.index',
         'create' => 'staff.pengajuan.create',
@@ -73,6 +74,7 @@ Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
         'update' => 'staff.pengajuan.update',
         'destroy' => 'staff.pengajuan.destroy'
     ]);
+    Route::get('staff/pengajuan/unduhberkas/{id}', [StaffController::class, 'unduhberkas'])->name('unduh.berkas');
 });
 
 require __DIR__.'/auth.php';
