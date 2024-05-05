@@ -83,6 +83,28 @@
         .ttd-kanan {
             text-align: right;
         }
+
+        /* css qr */
+        .qr-container {
+            position: relative;
+            display: flex;
+            justify-content: center; /* aligns children horizontally (logo and QR code) */
+            align-items: center; /* aligns children vertically (logo and QR code) */
+            height: 15px; /* adjust the height as needed */
+        }
+        .object-a {
+            position: absolute;
+            top: 50%; /* Menggeser logo ke tengah vertikal */
+            left: 50%; /* Menggeser logo ke tengah horizontal */
+            transform: translate(-50%, -50%); /* Membuat logo berada di tengah-tengah */
+        }
+        .lego {
+            position: absolute;
+            top: 50%; /* Menggeser logo ke tengah vertikal */
+            left: 50%; /* Menggeser logo ke tengah horizontal */
+            transform: translate(-50%, -50%); /* Membuat logo berada di tengah-tengah */
+            z-index: 2; /* Pastikan logo berada di lapisan terdepan */
+        }
     </style>
 </head>
 <body>
@@ -195,6 +217,13 @@
         <p style="margin-bottom: 5px;">Kedungringin, {{$list->tanggal_surat ?? ''}}
             <br><b>KEPALA DESA KEDUNGRINGIN</b></p>
         <br>
+        <br>
+        <br>
+        <div class="qr-container">
+            <img style="width: 25px" src="logo.png" class="lego" alt="">
+            <img class="object-a" src="data:image/png;base64, {!! base64_encode(QrCode::size(100)->generate('https://localhost/cek/surat/'.$list->id)) !!} ">
+        </div>
+            {{-- <div class="object-a">{!! $qrCodes !!}</div> --}}
         <br>
         <br>
         <p style="margin-top: 20px;"><u><b>RISKY WAHYUNI, SH</b></u></p>

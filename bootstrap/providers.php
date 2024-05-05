@@ -6,5 +6,5 @@ return [
     // Dompdf\ServiceProvider::class,
     Barryvdh\DomPDF\ServiceProvider::class,
     RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-
+    
 ];

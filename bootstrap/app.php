@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
             'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+            'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
