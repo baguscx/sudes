@@ -1,14 +1,17 @@
-<div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
+<div {{$attributes}} style="display: none;" class="pd-20 card-box mb-30">
     <form method="POST" action="{{ route('warga.surat.store') }}" enctype="multipart/form-data">
-    @csrf
-        <x-text-input value="sktm" name="jenis_surat" type="text" hidden/>
+        @csrf
+        <x-text-input value="sku" name="jenis_surat" type="text" hidden/>
 
         <div class="clearfix">
-            <h4 class="text-blue h4">Surat Keterangan Tidak Mampu</h4>
+            <h4 class="text-blue h4">Surat Keterangan Usaha</h4>
         </div>
+
         <div class="wizard-content">
+                <h6>Data pemilik usaha :</h6>
                 <section>
                     <div class="row">
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <x-input-label>Nama : </x-input-label>
@@ -54,9 +57,17 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
+                                <x-input-label>Warganegara : </x-input-label>
+                                <x-text-input value="{{ old('warganegara') }}" name="warganegara" type="text" class="form-control" />
+                                <x-input-error class="mt-2" :messages="$errors->get('warganegara')" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <x-input-label>Agama : </x-input-label>
                                 <select name="agama" class="form-control">
-                                    <option>Pilih Jenis Kelamin</option>
+                                    <option>Pilih Agama</option>
                                     <option value="Islam">Islam</option>
                                     <option value="Kristen">Kristen</option>
                                     <option value="Hindu">Hindu</option>
@@ -69,9 +80,13 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <x-input-label>Warganegara : </x-input-label>
-                                <x-text-input value="{{ old('warganegara') }}" name="warganegara" type="text" class="form-control" />
-                                <x-input-error class="mt-2" :messages="$errors->get('warganegara')" />
+                                <label>Status Pernikahan :</label>
+                                <select name="status_pernikahan" class="form-control">
+                                    <option>Pilih Status Pernikahan</option>
+                                    <option value="Belum Menikah">Belum Menikah</option>
+                                    <option value="Menikah">Menikah</option>
+                                    <option value="Pernah Menikah">Pernah Menikah</option>
+                                </select>
                             </div>
                         </div>
 
@@ -80,18 +95,6 @@
                                 <x-input-label>Pekerjaan : </x-input-label>
                                 <x-text-input value="{{ old('pekerjaan') }}" name="pekerjaan" type="text" class="form-control" />
                                 <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Status Pernikahan :</label>
-                                <select name="status_pernikahan" class="form-control">
-                                    <option>Pilih Status Pernikahan</option>
-                                    <option value="Belum Menikah">Belum Menikah</option>
-                                    <option value="Menikah">Menikah</option>
-                                    <option value="Pernah Menikah">Pernah Menikah</option>
-                                </select>
                             </div>
                         </div>
 
@@ -140,17 +143,47 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <x-input-label>Keperluan : </x-input-label>
-                                <x-text-input value="{{ old('tujuan') }}" name="tujuan" type="text" class="form-control" />
-                                <x-input-error class="mt-2" :messages="$errors->get('tujuan')" />
+                                <x-input-label>Berkas Persyaratan (.zip / .rar) : </x-input-label>
+                                <x-text-input value="{{ old('berkas') }}" name="berkas" type="file" class="form-control" />
+                                <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <h6>Keterangan usaha :</h6>
+                <section>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <x-input-label>Nama Usaha : </x-input-label>
+                                <x-text-input value="{{ old('nama_instansi') }}" name="nama_instansi" type="text" class="form-control" />
+                                <x-input-error class="mt-2" :messages="$errors->get('nama_instansi')" />
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <x-input-label>Berkas Persyaratan (.zip / .rar) : </x-input-label>
-                                <x-text-input value="{{ old('berkas') }}" name="berkas" type="file" class="form-control" />
-                                <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
+                                <x-input-label>Mulai Usaha : </x-input-label>
+                                <x-text-input value="{{ old('mulai_usaha') }}" name="mulai_usaha" type="date" class="form-control" />
+                                <x-input-error class="mt-2" :messages="$errors->get('mulai_usaha')" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <x-input-label>Alamat Usaha : </x-input-label>
+                                <x-text-input value="{{ old('alamat_usaha') }}" name="alamat_usaha" type="text" class="form-control" />
+                                <x-input-error class="mt-2" :messages="$errors->get('alamat_usaha')" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <x-input-label>Tujuan : </x-input-label>
+                                <x-text-input value="{{ old('tujuan') }}" name="tujuan" type="text" class="form-control" />
+                                <x-input-error class="mt-2" :messages="$errors->get('tujuan')" />
                             </div>
                         </div>
                     </div>
@@ -160,7 +193,6 @@
                             <x-button.primary-button>Submit</x-button.primary-button>
                         </div>
                     </div>
-
                 </section>
 
         </div>

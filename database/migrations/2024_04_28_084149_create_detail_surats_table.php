@@ -22,14 +22,14 @@ return new class extends Migration
             $table->string('nama')->nullable();
             $table->string('nik')->nullable();
             $table->string('nkk')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('agama')->nullable();
+            $table->enum('gender', ['Laki - Laki', 'Perempuan'])->nullable();
+            $table->enum('agama', ['Islam', 'Kristen', 'Hindu', 'Budha', 'Konghucu'])->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('warganegara')->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('pekerjaan')->nullable();
-            $table->string('status_pernikahan')->nullable();
+            $table->enum('status_pernikahan', ['Belum Menikah', 'Menikah', 'Pernah Menikah'])->nullable();
             $table->longText('alamat')->nullable();
             $table->string('ketua')->nullable();
             $table->string('bin')->nullable();
@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('nama_instansi')->nullable();
             $table->string('jurusan')->nullable();
             $table->string('semester')->nullable();
-            $table->string('mulai_usaha')->nullable();
+            $table->date('mulai_usaha')->nullable();
             $table->string('alamat_usaha')->nullable();
             $table->string('tujuan')->nullable();
             $table->string('alasan_pindah')->nullable();
@@ -48,6 +48,9 @@ return new class extends Migration
             $table->string('jenis_surat')->nullable();
             $table->string('kode_surat')->nullable();
             $table->string('berkas')->nullable();
+            $table->string('dusun')->nullable();
+            $table->string('rt')->nullable();
+            $table->string('rw')->nullable();
             $table->timestamps();
         });
     }

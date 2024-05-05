@@ -99,7 +99,7 @@
     </div>
     <hr class="line"/>
     <div class="container">
-        <h3 class="judul">SURAT KETERANGAN TIDAK MAMPU</h3>
+        <h3 class="judul">SURAT KETERANGAN KEMATIAN</h3>
         <p style="text-align: center; margin-top: 0; padding: 0; margin-bottom: 20px;">Nomor. 141.1/ /424.302.2.10/2023</p>
         <p style="padding: 0 50px 0 50px">Yang bertanda tangan dibawah ini Kepala Desa Kedungringin, Kecamatan Beji, Kabupaten Pasuruan menerangkan bahwa :</p>
         <table style="padding: 0 90px 0 80px; width: 100%; border-collapse: collapse;">
@@ -137,7 +137,7 @@
             </tr>
             <tr>
             <td style="text-align: left;">Alamat</td>
-            <td style="text-align: left; padding-left: 10px;">: {{$list->alamat ?? ''}}</td>
+            <td style="text-align: left; padding-left: 10px;">: {{'Dusun '. $list->dusun .', RT.'. $list->rt .', RW.'. $list->rw ?? ''}}</td>
             </tr>
         </table>
         <p style="padding: 0 50px 0 50px">

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminDashboard\AdminController;
 use App\Http\Controllers\AdminDashboard\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\KadesDashboard\KadesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffDashboard\StaffController;
 use App\Http\Controllers\WargaDashboard\SuratController;
@@ -14,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/cek/surat/{id}', [FrontController::class, 'cek'])->name('cek.surat');
+Route::get('/download/surat/{id}', [FrontController::class, 'unduh'])->name('unduh.surat');
+Route::get('/qr', [FrontController::class, 'qr'])->name('qr');
 
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -24,6 +29,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+//kades
+Route::middleware(['auth', 'verified', 'role:kades'])->group(function () {
+    Route::get('kades', [KadesController::class, 'dashboard'])->name('kades.dashboard');
+    Route::resource('kades/surat', KadesController::class)->names([
+    'index' => 'kades.surat.index',
+    'create' => 'kades.surat.create',
+    'store' => 'kades.surat.store',
+    'show' => 'kades.surat.show',
+    'edit' => 'kades.surat.edit',
+    'update' => 'kades.surat.update',
+    'destroy' => 'kades.surat.destroy'
+    ]);
 });
 
 // Admin
@@ -38,32 +57,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     'update' => 'admin.users.update',
     'destroy' => 'admin.users.destroy'
     ]);
-    // Route::get('admin/users', [UserController::class, 'index'])->name('admin.users.index');
-    // Route::get('admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
-    // Route::post('admin/users', [UserController::class, 'store'])->name('admin.users.store');
-    // Route::put('admin/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
-    // Route::get('admin/users/{id}', [UserController::class, 'show'])->name('admin.users.show');
-    // Route::get('admin/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
-    // Route::delete('admin/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
-// Warga
-Route::middleware(['auth', 'verified', 'role:warga'])->group(function () {
-    Route::get('warga', WargaController::class)->name('warga.dashboard');
-    Route::get('warga/surat/list', [SuratController::class, 'history_surat'])->name('warga.surat.history');
-    Route::resource('warga/surat', SuratController::class)->names([
-        'index' => 'warga.surat.index',
-        'create' => 'warga.surat.create',
-        'store' => 'warga.surat.store',
-        'show' => 'warga.surat.show',
-        'edit' => 'warga.surat.edit',
-        'update' => 'warga.surat.update',
-        'destroy' => 'warga.surat.destroy'
-    ]);
-    Route::get('warga/surat/pdf/{id}', [SuratController::class, 'pdf'])->name('warga.surat.pdf');
-});
 Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
     Route::get('staff', [StaffController::class, 'dashboard'])->name('staff.dashboard');
+    Route::get('staff/list', [StaffController::class, 'list'])->name('staff.pengajuan.list');
     Route::put('staff/pengajuan/{id}', [StaffController::class, 'konfirmasi'])->name('staff.pengajuan.confirm');
     Route::resource('staff/pengajuan', StaffController::class)->names([
         'index' => 'staff.pengajuan.index',
@@ -75,6 +73,25 @@ Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
         'destroy' => 'staff.pengajuan.destroy'
     ]);
     Route::get('staff/pengajuan/unduhberkas/{id}', [StaffController::class, 'unduhberkas'])->name('unduh.berkas');
+});
+
+// Warga
+Route::middleware(['auth', 'verified', 'role:warga'])->group(function () {
+    Route::get('warga', WargaController::class)->name('warga.dashboard');
+    Route::get('warga/surat/berkas/{id}', [SuratController::class, 'berkas'])->name('warga.surat.berkas');
+    Route::post('warga/surat/send/{id}', [SuratController::class, 'send'])->name('warga.surat.send');
+    Route::get('warga/surat/draft', [SuratController::class, 'draft'])->name('warga.surat.draft');
+    Route::get('warga/surat/riwayat', [SuratController::class, 'riwayat'])->name('warga.surat.riwayat');
+    Route::resource('warga/surat', SuratController::class)->names([
+        'index' => 'warga.surat.index',
+        'create' => 'warga.surat.create',
+        'store' => 'warga.surat.store',
+        'show' => 'warga.surat.show',
+        'edit' => 'warga.surat.edit',
+        'update' => 'warga.surat.update',
+        'destroy' => 'warga.surat.destroy'
+    ]);
+    Route::get('warga/surat/pdf/{id}', [SuratController::class, 'pdf'])->name('warga.surat.pdf');
 });
 
 require __DIR__.'/auth.php';

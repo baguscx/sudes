@@ -16,7 +16,10 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])->get();
+        $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
+                    ->whereIn('status', ['Diajukan'])
+                    ->get();
+        // $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])->get();
 
         return view('staff.pengajuan.index', compact('pengajuanSurat'));
     }
@@ -51,7 +54,8 @@ class StaffController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $detailSurat = DetailSurat::where('id', $id)->first();
+        return view('staff.pengajuan.edit', compact('detailSurat'));
     }
 
     /**
@@ -59,7 +63,20 @@ class StaffController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DetailSurat::where('id', $id)->update([
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'gender' => $request->gender,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'warganegara' => $request->warganegara,
+            'agama' => $request->agama,
+            'pekerjaan' => $request->pekerjaan,
+            'status_pernikahan' => $request->status_pernikahan,
+            'tujuan' => $request->tujuan,
+            'alamat' => $request->alamat,
+            'jenis_surat' => 'Surat Keterangan Tidak Mampu',
+        ]);
     }
 
     /**
@@ -97,5 +114,14 @@ class StaffController extends Controller
             $berkas = $detailSurat->berkas;
         endforeach;
         return response()->download(storage_path("app/public/$berkas"));
+    }
+
+        public function list()
+    {
+        $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
+                            ->whereIn('status', ['DiProses', 'Ditolak', 'Selesai'])
+                            ->get();
+
+        return view('staff.pengajuan.list', compact('pengajuanSurat'));
     }
 }

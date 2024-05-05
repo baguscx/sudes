@@ -1,17 +1,12 @@
 <x-app-layout>
-    <x-slot name="title">Riwayat</x-slot>
+    <x-slot name="title">Draft</x-slot>
+        @include('sweetalert::alert')
     <!-- Simple Datatable start -->
     <div class="card-box mb-30">
         <div class="pd-20">
-            <h4 class="text-blue h4">Data Table Simple</h4>
+            <h4 class="text-blue h4">Draft</h4>
             <p class="mb-0">
-                you can find more options
-                <a
-                    class="text-primary"
-                    href="https://datatables.net/"
-                    target="_blank"
-                    >Click Here</a
-                >
+                surat yang belum dikirim
             </p>
         </div>
         <div class="pb-20">
@@ -29,7 +24,7 @@
                 <tbody>
                     @if($pengajuanSurat->isEmpty())
                         <div class="alert alert-warning" role="alert">
-                            Anda belum pernah mengajukan surat apapun.
+                            Tidak ada draft.
                         </div>
                     @else
                         @foreach($pengajuanSurat as $pengajuan)
@@ -38,20 +33,7 @@
                             @foreach($pengajuan->detail_surats as $detailSurat)
                                 <td>{{$detailSurat->nama}}</td>
                                 <td>{{$detailSurat->jenis_surat}}</td>
-                                <td>{{$pengajuan->status}}</td>
-                                @if ($pengajuan->status == 'Diajukan')
-                                    <td>
-                                        <i>Sedang ditinjau</i>
-                                    </td>
-                                @elseif ($pengajuan->status == 'Diproses')
-                                    <td>
-                                        <i>Pengajuan Diproses</i>
-                                    </td>
-                                @elseif ($pengajuan->status == 'Ditolak')
-                                    <td>
-                                        <i>Pengajuan Ditolak</i>
-                                    </td>
-                                @elseif ($pengajuan->status == 'Selesai')
+                                <td class="text-warning">{{$pengajuan->status}}</td>
                                     <td>
                                         <div class="dropdown" >
                                             <a
@@ -65,17 +47,21 @@
                                             <div
                                                 class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
                                             >
-                                                <a class="dropdown-item" href="#"
-                                                    ><i class="dw dw-eye"></i> View</a
-                                                >
-                                                <a class="dropdown-item" href="{{route('warga.surat.pdf', $detailSurat->id)}}" ><i class="dw dw-edit2"></i> Download</a >
-                                                <a class="dropdown-item" href="#"
-                                                    ><i class="dw dw-delete-3"></i> Delete</a
-                                                >
+                                                    <form id="sendForm-{{ $pengajuan->id }}" action="{{route('warga.surat.send', $pengajuan->id)}}" method="post">
+                                                        @csrf
+                                                        <button style="display: none;" type="submit"></button>
+                                                        <a class="dropdown-item"href="#" onclick="event.preventDefault(); document.getElementById('sendForm-{{ $pengajuan->id }}').submit();" ><i class="dw dw-paper-plane"></i> Kirim</a >
+                                                    </form>
+                                                <a class="dropdown-item" href="{{route('warga.surat.edit', $detailSurat->id)}}" ><i class="dw dw-edit2"></i> Edit</a >
+                                                    <form id="deleteForm-{{ $pengajuan->id }}" action="{{route('warga.surat.destroy', $pengajuan->id)}}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button style="display: none;" type="submit"></button>
+                                                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('deleteForm-{{ $pengajuan->id }}').submit();""><i class="dw dw-delete-3"></i> Hapus</a>
+                                                    </form>
                                             </div>
                                         </div>
                                     </td>
-                                @endif
                             </tr>
                             @endforeach
                         @endforeach

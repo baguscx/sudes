@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
+            'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

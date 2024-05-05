@@ -1,10 +1,10 @@
 <div {{ $attributes }} style="display: none;" class="pd-20 card-box mb-30">
     <form method="POST" action="{{ route('warga.surat.store') }}" enctype="multipart/form-data">
     @csrf
-        <x-text-input value="sktm" name="jenis_surat" type="text" hidden/>
+        <x-text-input value="skd" name="jenis_surat" type="text" hidden/>
 
         <div class="clearfix">
-            <h4 class="text-blue h4">Surat Keterangan Tidak Mampu</h4>
+            <h4 class="text-blue h4">Surat Keterangan Domisili</h4>
         </div>
         <div class="wizard-content">
                 <section>

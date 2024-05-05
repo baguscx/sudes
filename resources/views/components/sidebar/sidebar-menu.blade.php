@@ -16,6 +16,7 @@
             </a>
             <ul class="submenu">
                 <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.pengajuan.index')}}" icon="" title="Belum diKonfirmasi" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.pengajuan.list')}}" icon="" title="Sudah dikonfirmasi" />
                 {{-- <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.pengajuan.history')}}" icon="" title="Riwayat" /> --}}
             </ul>
         </li>
@@ -28,8 +29,9 @@
                 ><span class="mtext">Surat</span>
             </a>
             <ul class="submenu">
-                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.surat.index')}}" icon="" title="Buat Surat" />
-                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.surat.history')}}" icon="" title="Riwayat" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.surat.index')}}" icon="" title="Buat Surat Baru" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.surat.draft')}}" icon="" title="Draft" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('warga.surat.riwayat')}}" icon="" title="Riwayat Pengajuan" />
             </ul>
         </li>
         @endif

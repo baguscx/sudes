@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SURAT KETERANGAN TIDAK MAMPU</title>
+    <title>SURAT KETERANGAN USAHA</title>
     <style type="text/css">
         body {
             margin: 0;
@@ -99,22 +99,21 @@
     </div>
     <hr class="line"/>
     <div class="container">
-        <h3 class="judul">SURAT KETERANGAN TIDAK MAMPU</h3>
+        <h3 class="judul">SURAT KETERANGAN USAHA</h3>
         <p style="text-align: center; margin-top: 0; padding: 0; margin-bottom: 20px;">Nomor. 141.1/ /424.302.2.10/2023</p>
         <p style="padding: 0 50px 0 50px">Yang bertanda tangan dibawah ini Kepala Desa Kedungringin, Kecamatan Beji, Kabupaten Pasuruan menerangkan bahwa :</p>
-
         <table style="padding: 0 90px 0 80px; width: 100%; border-collapse: collapse;">
             <tr>
             <td style="text-align: left; width: 30%;">Nama</td>
             <td style="text-align: left; padding-left: 10px;">: {{$list->nama  ?? ''}}</td>
             </tr>
             <tr>
-            <td style="text-align: left;">Tempat Tanggal Lahir</td>
-            <td style="text-align: left; padding-left: 10px;">: {{$list->tempat_lahir.', '.\Carbon\Carbon::parse($list->tanggal_lahir)->isoFormat('D MMMM YYYY') ?? ''}}</td>
-            </tr>
-            <tr>
             <td style="text-align: left;">NIK</td>
             <td style="text-align: left; padding-left: 10px;">: {{$list->nik ?? ''}}</td>
+            </tr>
+            <tr>
+            <td style="text-align: left;">Tempat Tanggal Lahir</td>
+            <td style="text-align: left; padding-left: 10px;">: {{$list->tempat_lahir.', '.\Carbon\Carbon::parse($list->tanggal_lahir)->isoFormat('D MMMM YYYY') ?? ''}}</td>
             </tr>
             <tr>
             <td style="text-align: left;">Jenis Kelamin</td>
@@ -125,6 +124,10 @@
             <td style="text-align: left; padding-left: 10px;">: {{$list->warganegara.' / '.$list->agama ?? ''}}</td>
             </tr>
             <tr>
+            <td style="text-align: left;">Status Pernikahan</td>
+            <td style="text-align: left; padding-left: 10px;">: {{$list->status_pernikahan ?? ''}}</td>
+            </tr>
+            <tr>
             <td style="text-align: left;">Pekerjaan</td>
             <td style="text-align: left; padding-left: 10px;">: {{$list->pekerjaan ?? ''}}</td>
             </tr>
@@ -133,11 +136,29 @@
             <td style="text-align: left; padding-left: 10px;">: {{'Dusun '. $list->dusun .', RT.'. $list->rt .', RW.'. $list->rw ?? ''}}</td>
             </tr>
         </table>
-
         <p style="padding: 0 50px 0 50px">
-            Bahwa nama yang tercantum diatas adalah benar-benar berdomisili di Desa Kedungringin, Kecamatan Beji. Sepanjang pengamatan kami dan sesuai data yang ada dalam catatan kependudukan orang tersebut diatas benar tergolong dalam keluarga prasejahtera ( Keluarga Berpenghasilan Rendah). Surat Keterangan ini diberikan untuk {{$list->tujuan ?? ''}}.
+           Sesuai dengan keterangan yang bersangkutan benar nama tersebut diatas mempunyai usaha sebagai berikut :
         </p>
-        <p style="padding: 0 50px 0 50px; margin-top:30px">
+        <table style="padding: 0 90px 0 80px; width: 100%; border-collapse: collapse;">
+            <tr>
+            <td style="text-align: left; width: 30%;">Nama Usaha</td>
+            <td style="text-align: left; padding-left: 10px;">: {{$list->nama_instansi ?? ''}}</td>
+            </tr>
+            <tr>
+            <td style="text-align: left; width: 30%;">Mulai usaha sejak</td>
+            <td style="text-align: left; padding-left: 10px;">: {{\Carbon\Carbon::parse($list->mulai_usaha)->diffInYears(\Carbon\Carbon::now()->startOfDay()). ' Tahun'  ?? ''}}</td>
+            </tr>
+            <tr>
+            <td style="text-align: left;">Alamat Usaha</td>
+            <td style="text-align: left; padding-left: 10px;">: {{$list->alamat_usaha ?? ''}}</td>
+            </tr>
+            <tr>
+            <td style="text-align: left;">Tujuan</td>
+            <td style="text-align: left; padding-left: 10px;">: {{$list->tujuan ?? ''}}</td>
+            </tr>
+        </table>
+        <p style="padding: 0 50px 0 50px">
+            Surat Keterangan ini dibuat untuk keamanan. <br>
             Demikian surat keterangan ini dibuat dengan sebenarnya dan diberikan kepada yang bersangkutan untuk dapat dipergunakan sebagaimana mestinya.
         </p>
 
@@ -146,9 +167,7 @@
 
     </div>
     <div class="ttd-kanan" style="text-align: center">
-        <br>
-        <br>
-        <p style="margin-bottom: 5px;">Pasuruan, {{$list->tanggal_surat ?? ''}}
+        <p style="margin-bottom: 5px;">Kedungringin, {{$list->tanggal_surat ?? ''}}
             <br><b>KEPALA DESA KEDUNGRINGIN</b></p>
         <br>
         <br>

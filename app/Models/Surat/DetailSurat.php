@@ -42,7 +42,10 @@ class DetailSurat extends Model
             'keterangan',
             'jenis_surat',
             'kode_surat',
-            'berkas'
+            'berkas',
+            'dusun',
+            'rt',
+            'rw',
         ];
 
     public function users(){

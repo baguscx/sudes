@@ -5,5 +5,6 @@ return [
     Spatie\Permission\PermissionServiceProvider::class,
     // Dompdf\ServiceProvider::class,
     Barryvdh\DomPDF\ServiceProvider::class,
+    RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
 ];

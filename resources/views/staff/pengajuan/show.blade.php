@@ -19,7 +19,7 @@
             <div class="col-xl-4 mb-30">
                 <div class="card-box height-100-p pd-20">
                     <h2 class="h4 mb-20">Aksi</h2>
-                    <x-button.primary-button class="col-md-12 mb-3"> <i class="dw dw-edit2"></i> Edit</x-button.primary-button>
+                    <a href="{{route('staff.pengajuan.edit', $detailSurat->id)}}" class="col-md-12 mb-3 btn btn-primary"> <i class="dw dw-edit2"></i> Edit</a>
                     <hr>
                     <form action="{{route('staff.pengajuan.confirm', $pengajuanSurat->id)}}" method="POST">
                         @csrf

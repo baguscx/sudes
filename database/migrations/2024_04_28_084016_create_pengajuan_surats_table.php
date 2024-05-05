@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('users_id')->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->date('tanggal_pengajuan');
-            $table->enum('status', ['Diajukan', 'Diproses', 'Selesai', 'Ditolak']);
+            $table->enum('status', ['Draft', 'Diproses', 'Dikonfirmasi', 'Selesai', 'Ditolak']);
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
