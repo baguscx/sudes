@@ -221,7 +221,7 @@
         <br>
         <div class="qr-container">
             <img style="width: 25px" src="logo.png" class="lego" alt="">
-            <img class="object-a" src="data:image/png;base64, {!! base64_encode(QrCode::size(100)->generate('https://localhost/cek/surat/'.$list->id)) !!} ">
+            <img class="object-a" src="data:image/png;base64, {!! base64_encode(QrCode::size(100)->generate('http://127.0.0.1:8000/cek/surat/'.$list->id)) !!} ">
         </div>
             {{-- <div class="object-a">{!! $qrCodes !!}</div> --}}
         <br>
