@@ -8,14 +8,11 @@
                 </div>
                 <div class="col-md-8">
                     <h4 class="font-20 weight-500 mb-10 text-capitalize">
-                        Welcome back
-                        <div class="weight-600 font-30 text-blue">Johnny Brown!</div>
+                        Halo,
+                        <div class="weight-600 font-30 text-blue">{{ Auth::user()->name }}</div>
                     </h4>
                     <p class="font-18 max-width-600">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                        hic non repellendus debitis iure, doloremque assumenda. Autem
-                        modi, corrupti, nobis ea iure fugiat, veniam non quaerat
-                        mollitia animi error corporis.
+                        Selamat datang! Mudahkan urusan administrasi desa Anda di sini.
                     </p>
                 </div>
             </div>
@@ -25,11 +22,11 @@
                 <div class="card-box height-100-p widget-style1">
                     <div class="d-flex flex-wrap align-items-center">
                         <div class="progress-data">
-                            <div id="chart"></div>
+                            <div><i class="bi bi-envelope-paper" style="font-size: 50px;"></i> </div>
                         </div>
                         <div class="widget-data">
-                            <div class="h4 mb-0">2020</div>
-                            <div class="weight-600 font-14">Contact</div>
+                            <div class="h4 mb-0">4</div>
+                            <div class="weight-600 font-14">Layanan Surat</div>
                         </div>
                     </div>
                 </div>
@@ -38,11 +35,11 @@
                 <div class="card-box height-100-p widget-style1">
                     <div class="d-flex flex-wrap align-items-center">
                         <div class="progress-data">
-                            <div id="chart2"></div>
+                            <div><i class="icon-copy bi bi-envelope-plus" style="font-size: 50px;"></i></div>
                         </div>
                         <div class="widget-data">
-                            <div class="h4 mb-0">400</div>
-                            <div class="weight-600 font-14">Deals</div>
+                            <div class="h4 mb-0">{{count($ps->where('status', 'Diproses'))}}</div>
+                            <div class="weight-600 font-14">Surat belum dikonfirmasi</div>
                         </div>
                     </div>
                 </div>
@@ -51,11 +48,11 @@
                 <div class="card-box height-100-p widget-style1">
                     <div class="d-flex flex-wrap align-items-center">
                         <div class="progress-data">
-                            <div id="chart3"></div>
+                            <div><i class="icon-copy bi bi-envelope-dash" style="font-size: 50px;"></i></div>
                         </div>
                         <div class="widget-data">
-                            <div class="h4 mb-0">350</div>
-                            <div class="weight-600 font-14">Campaign</div>
+                            <div class="h4 mb-0">{{count($ps->whereIn('status', ['Dikonfirmasi', 'Selesai']))}}</div>
+                            <div class="weight-600 font-14">Surat sudah dikonfirmasi</div>
                         </div>
                     </div>
                 </div>
@@ -64,29 +61,16 @@
                 <div class="card-box height-100-p widget-style1">
                     <div class="d-flex flex-wrap align-items-center">
                         <div class="progress-data">
-                            <div id="chart4"></div>
+                            <div><i class="icon-copy bi bi-envelope-check" style="font-size: 50px;"></i></div>
                         </div>
                         <div class="widget-data">
-                            <div class="h4 mb-0">$6060</div>
-                            <div class="weight-600 font-14">Worth</div>
+                            <div class="h4 mb-0">{{count($ps->whereIn('status', ['Ditolak']))}}</div>
+                            <div class="weight-600 font-14">Surat ditolak</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xl-8 mb-30">
-                <div class="card-box height-100-p pd-20">
-                    <h2 class="h4 mb-20">Activity</h2>
-                    <div id="chart5"></div>
-                </div>
-            </div>
-            <div class="col-xl-4 mb-30">
-                <div class="card-box height-100-p pd-20">
-                    <h2 class="h4 mb-20">Lead Target</h2>
-                    <div id="chart6"></div>
-                </div>
-            </div>
         </div>
     </div>
 </x-app-layout>

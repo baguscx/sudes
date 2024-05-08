@@ -7,6 +7,7 @@ use App\Models\Surat\PengajuanSurat;
 use App\Models\User;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
 // use PDF;
 // use Elibyy\TCPDF\Facades\TCPDF;
 use Illuminate\Http\Request;
@@ -37,10 +38,10 @@ class FrontController extends Controller
                 return $pdf->download('Surat Keterangan Kematian - '.$list->nama.'.pdf');
             } else if($list->jenis_surat == 'Surat Keterangan Tidak Mampu'){
                 return $pdf->download('Surat Keterangan Tidak Mampu - '.$list->nama.'.pdf');
-            }
-        } else {
+            }   else {
             return "belom cok";
         }
+    }
     }
 
     public function qr(){
@@ -62,6 +63,14 @@ class FrontController extends Controller
 
         // return view('qrcode', compact('qrCodes'));
     }
+
+    public function preview(){
+        $dompdf = new Dompdf(['pdfBackend' => 'GD']);
+        $dompdf->loadHtml("<h1>asu</h1>");
+        $dompdf->render();
+        $dompdf->stream("asu.pdf", array("Attachment" => false));
+    }
+
 }
 
 // $image = QrCode::format('png')

@@ -205,7 +205,6 @@
             </tr>
         </table>
         <p style="padding: 0 50px 0 50px">
-            Surat Keterangan ini dibuat untuk keamanan. <br>
             Demikian surat keterangan ini dibuat dengan sebenarnya dan diberikan kepada yang bersangkutan untuk dapat dipergunakan sebagaimana mestinya.
         </p>
 

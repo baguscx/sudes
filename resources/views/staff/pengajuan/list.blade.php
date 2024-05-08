@@ -3,16 +3,7 @@
     <!-- Simple Datatable start -->
     <div class="card-box mb-30">
         <div class="pd-20">
-            <h4 class="text-blue h4">Data Table Simple</h4>
-            <p class="mb-0">
-                you can find more options
-                <a
-                    class="text-primary"
-                    href="https://datatables.net/"
-                    target="_blank"
-                    >Click Here</a
-                >
-            </p>
+            <h4 class="text-blue h4">Daftar surat sudah dikonfirmasi</h4>
         </div>
         <div class="pb-20">
             <table class="data-table table stripe hover nowrap">
@@ -51,12 +42,15 @@
                                             <a class="dropdown-item" href="{{route('staff.pengajuan.show', $detailSurat->id)}}" >
                                                 <i class="dw dw-eye"></i> Cek
                                             </a>
-                                            <a class="dropdown-item" href="{{route('warga.surat.pdf', $detailSurat->id)}}">
-                                                <i class="dw dw-edit2"></i> Edit
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <i class="dw dw-delete-3"></i> Download
-                                            </a>
+                                            @if($pengajuan->status == 'Selesai')
+                                                <a class="dropdown-item" href="{{route('unduh.surat', $detailSurat->id)}}">
+                                                    <i class="dw dw-download"></i> Download
+                                                </a>
+                                            @else
+                                                <a class="dropdown-item">
+                                                    <i class="dw dw-download"></i> Download❎
+                                                </a>
+                                            @endif
                                         </div>
                                         </div>
                                     </td>

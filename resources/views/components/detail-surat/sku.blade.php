@@ -60,3 +60,26 @@
         <td><a href="{{ route('staff.pengajuan.berkas', ['id' => $detailSurat->id]) }}"><x-button.primary-button>Unduh Berkas</x-button.primary-button></a></td>
     </tr>
 </table>
+<p>Data Usaha :</p>
+<table class="table table-bordered">
+    <tr>
+        <td width="30%">Nama Usaha </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->nama_instansi ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Mulai Usaha </td>
+        <td width="1%">:</td>
+        <td>{{ \Carbon\Carbon::parse($detailSurat->mulai_usaha)->isoFormat('D MMMM YYYY') ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Alamat Usaha </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->alamat_usaha}}</td>
+    </tr>
+    <tr>
+        <td width="30%">Tujuan </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->tujuan}}</td>
+    </tr>
+</table>

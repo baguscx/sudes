@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/cek/surat/{id}', [FrontController::class, 'cek'])->name('cek.surat');
 Route::get('/download/surat/{id}', [FrontController::class, 'unduh'])->name('unduh.surat');
+Route::get('/preview/surat', [FrontController::class, 'preview'])->name('preview.surat');
 Route::get('/qr', [FrontController::class, 'qr'])->name('qr');
 
 // Route::middleware('auth')->group(function () {
@@ -62,7 +63,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
     Route::get('staff', [StaffController::class, 'dashboard'])->name('staff.dashboard');
     Route::get('staff/list', [StaffController::class, 'list'])->name('staff.pengajuan.list');
-    Route::put('staff/pengajuan/{id}', [StaffController::class, 'konfirmasi'])->name('staff.pengajuan.confirm');
+    Route::get('staff/berkas/{id}', [StaffController::class, 'berkas'])->name('staff.pengajuan.berkas');
+    Route::put('staff/pengajuan/{id}', [StaffController::class, 'confirm'])->name('staff.pengajuan.confirm');
     Route::resource('staff/pengajuan', StaffController::class)->names([
         'index' => 'staff.pengajuan.index',
         'create' => 'staff.pengajuan.create',
@@ -72,7 +74,6 @@ Route::middleware(['auth', 'verified', 'role:staff'])->group(function () {
         'update' => 'staff.pengajuan.update',
         'destroy' => 'staff.pengajuan.destroy'
     ]);
-    Route::get('staff/pengajuan/unduhberkas/{id}', [StaffController::class, 'unduhberkas'])->name('unduh.berkas');
 });
 
 // Warga

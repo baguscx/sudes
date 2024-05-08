@@ -1,63 +1,80 @@
+<h2 class="h4 mb-20">Detail - {{$detailSurat->jenis_surat}}</h2>
+
+<table>
+    <tr>
+        <td width="20%">Pengaju </td>
+        <td width="1%">:</td>
+        <td>{{ $user->name }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Nik </td>
+        <td width="1%">:</td>
+        <td>{{ $user->detail_users->nik }}</td>
+    </tr>
+</table>
+<br>
 <table class="table table-bordered">
-    @foreach($pengajuanSurat->detail_surats as $detailSurat)
-        <tr>
-            <th scope="col" colspan="2" style="text-align: center;">Informasi</th>
-        </tr>
-        <tr>
-            <td >Nama</td>
-            <td>{{$detailSurat->nama ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Bin/Binti</td>
-            <td>{{$detailSurat->bin ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>NIK</td>
-            <td>{{$detailSurat->nik ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Tempat, Tanggal Lahir</td>
-            <td>{{$detailSurat->tempat_lahir .', '. \Carbon\Carbon::parse($detailSurat->tanggal_lahir)->isoFormat('D MMMM YYYY') ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Jenis Kelamin</td>
-            <td>{{$detailSurat->gender ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Warganegara / Agama</td>
-            <td>{{$detailSurat->warganegara .' / '. $detailSurat->agama ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Status Pernikahan</td>
-            <td>{{$detailSurat->status_pernikahan ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Pekerjaan</td>
-            <td>{{$detailSurat->pekerjaan ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>{{$detailSurat->alamat ?? ''}}</td>
-        </tr>
-        <tr>
-            <th scope="col" colspan="2" style="text-align: center;">Informasi Kematian</th>
-        </tr>
-        <tr>
-            <td>Jam & Tanggal Meninggal</td>
-            <td>{{\Carbon\Carbon::parse($detailSurat->jam_meninggal)->format('H:i') .', '. \Carbon\Carbon::parse($detailSurat->tanggal_meninggal)->isoFormat('D MMMM YYYY') ?? ''}}</td>
-        </tr>
-        <tr>
-            <td>Tempat Meninggal</td>
-            <td>{{$detailSurat->tempat_meninggal}}</td>
-        </tr>
-        <tr>
-            <td>Sebab Meninggal</td>
-            <td>{{$detailSurat->sebab_meninggal}}</td>
-        </tr>
-        <tr>
-            <td>Berkas</td>
-            <td><a href="{{ route('unduh.berkas', ['id' => $detailSurat->id]) }}"><x-button.primary-button>Unduh Berkas</x-button.primary-button></a></td>
-        </tr>
-    @endforeach
-        {{-- <td>{{$pengajuanSurat->status}}</td> --}}
+    <tr>
+        <td width="30%">Nama </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->nama ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">NIK </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->nik ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Tempat, Tanggal Lahir </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->tempat_lahir .', '. \Carbon\Carbon::parse($detailSurat->tanggal_lahir)->isoFormat('D MMMM YYYY') ?? ''}}</td>
+    </tr>
+    <tr>
+        <td width="30%">Jenis Kelamin </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->gender ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Agama </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->agama ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Warganegara </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->warganegara ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Alamat </td>
+        <td width="1%">:</td>
+        <td>{{'Dusun '. $detailSurat->dusun .', RT.'. $detailSurat->rt .', RW.'. $detailSurat->rw ?? ''}}</td>
+    </tr>
+    <tr>
+        <td width="30%">Berkas </td>
+        <td width="1%">:</td>
+        <td><a href="{{ route('staff.pengajuan.berkas', ['id' => $detailSurat->id]) }}"><x-button.primary-button>Unduh Berkas</x-button.primary-button></a></td>
+    </tr>
+</table>
+<p>Data meninggal : </p>
+<table class="table table-bordered">
+    <tr>
+        <td width="30%">Tanggal Meninggal </td>
+        <td width="1%">:</td>
+        <td>{{ \Carbon\Carbon::parse($detailSurat->tanggal_meninggal)->isoFormat('D MMMM YYYY') ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Jam Meninggal </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->jam_meninggal ?? '' }}</td>
+    </tr>
+    <tr>
+        <td width="30%">Tempat Meninggal </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->tempat_meninggal  ?? ''}}</td>
+    </tr>
+    <tr>
+        <td width="30%">Sebab Meninggal </td>
+        <td width="1%">:</td>
+        <td>{{ $detailSurat->sebab_meninggal ?? '' }}</td>
+    </tr>
 </table>

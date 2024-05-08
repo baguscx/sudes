@@ -70,6 +70,7 @@ class SuratController extends Controller
                     'dusun' => $request->dusun,
                     'rt' => $request->rt,
                     'rw' => $request->rw,
+                    'tujuan' => $request->tujuan,
                 ]);
             }
 
