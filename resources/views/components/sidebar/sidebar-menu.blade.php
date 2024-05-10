@@ -6,6 +6,17 @@
 
         @elseif (auth()->user()->hasRole('kades'))
         <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.dashboard')}}" icon="micon bi bi-house" title="Home"/>
+        <li class="dropdown">
+            <a href="javascript:;" class="dropdown-toggle">
+                <span class="micon bi bi-file-earmark-text"></span
+                ><span class="mtext">Pengajuan</span>
+            </a>
+            <ul class="submenu">
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.pengajuan.index')}}" icon="" title="Belum di Tanda Tangani" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.pengajuan.list')}}" icon="" title="Belum di Tanda Tangani" />
+                {{-- <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.pengajuan.history')}}" icon="" title="Riwayat" /> --}}
+            </ul>
+        </li>
 
         @elseif (auth()->user()->hasRole('staff'))
         <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.dashboard')}}" icon="micon bi bi-house" title="Home"/>

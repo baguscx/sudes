@@ -35,14 +35,17 @@ Route::middleware('auth')->group(function () {
 //kades
 Route::middleware(['auth', 'verified', 'role:kades'])->group(function () {
     Route::get('kades', [KadesController::class, 'dashboard'])->name('kades.dashboard');
-    Route::resource('kades/surat', KadesController::class)->names([
-    'index' => 'kades.surat.index',
-    'create' => 'kades.surat.create',
-    'store' => 'kades.surat.store',
-    'show' => 'kades.surat.show',
-    'edit' => 'kades.surat.edit',
-    'update' => 'kades.surat.update',
-    'destroy' => 'kades.surat.destroy'
+    Route::get('kades/list', [KadesController::class, 'list'])->name('kades.pengajuan.list');
+    Route::get('kades/berkas/{id}', [KadesController::class, 'berkas'])->name('kades.pengajuan.berkas');
+    Route::put('kades/pengajuan/{id}', [KadesController::class, 'confirm'])->name('kades.pengajuan.confirm');
+    Route::resource('kades/pengajuan', KadesController::class)->names([
+        'index' => 'kades.pengajuan.index',
+        'create' => 'kades.pengajuan.create',
+        'store' => 'kades.pengajuan.store',
+        'show' => 'kades.pengajuan.show',
+        'edit' => 'kades.pengajuan.edit',
+        'update' => 'kades.pengajuan.update',
+        'destroy' => 'kades.pengajuan.destroy'
     ]);
 });
 

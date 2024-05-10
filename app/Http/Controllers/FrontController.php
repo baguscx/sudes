@@ -23,30 +23,55 @@ class FrontController extends Controller
     }
 
     public function unduh($id){
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
         $list = DetailSurat::where('id', $id)->first();
         $ps = PengajuanSurat::where('id', $list->pengajuan_surat_id)->first();
+        $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $indeks = array_flip($selesaiStatus);
 
-        if($ps->status == 'Selesai'){
-            $user = User::where('id', $list->users_id)->first();
-            $qrCodes = QrCode::size(120)->generate('https://localhost:8000/cek/surat/'.$list->id);
-            $pdf = Pdf::loadView('front.unduh', compact('list', 'user', 'qrCodes'))->setPaper('a4', 'potrait');
-            if($list->jenis_surat == 'Surat Keterangan Usaha'){
-                return $pdf->download('Surat Keterangan Usaha - '.$list->nama.'.pdf');
-            } else if($list->jenis_surat == 'Surat Keterangan Domisili'){
-                return $pdf->download('Surat Keterangan Domisili - '.$list->nama.'.pdf');
-            } else if($list->jenis_surat == 'Surat Keterangan Kematian'){
-                return $pdf->download('Surat Keterangan Kematian - '.$list->nama.'.pdf');
-            } else if($list->jenis_surat == 'Surat Keterangan Tidak Mampu'){
-                return $pdf->download('Surat Keterangan Tidak Mampu - '.$list->nama.'.pdf');
-            }   else {
-            return "belom cok";
+        $user = User::where('id', $list->users_id)->first();
+        $qrCodes = QrCode::size(120)->generate('https://localhost:8000/cek/surat/'.$list->id);
+        $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('a4', 'potrait');
+        if($list->jenis_surat == 'Surat Keterangan Usaha'){
+            return $pdf->stream('Surat Keterangan Usaha - '.$list->nama.'.pdf');
+        } else if($list->jenis_surat == 'Surat Keterangan Domisili'){
+            return $pdf->stream('Surat Keterangan Domisili - '.$list->nama.'.pdf');
+        } else if($list->jenis_surat == 'Surat Keterangan Kematian'){
+            return $pdf->stream('Surat Keterangan Kematian - '.$list->nama.'.pdf');
+        } else if($list->jenis_surat == 'Surat Keterangan Tidak Mampu'){
+            return $pdf->stream('Surat Keterangan Tidak Mampu - '.$list->nama.'.pdf');
         }
     }
-    }
+
 
     public function qr(){
-        // phpinfo();
+        $pdf = Pdf::loadView('front.pdf');
+        return $pdf->setPaper('a4', 'potrait')->stream('hello.pdf');
 
+
+    }
+
+    // public function preview(){
+        // return `<embed src='`. $pdf .`' width='100%' height='100%' />`;
+
+        // $dompdf = new Dompdf(['pdfBackend' => 'GD']);
+        // $dompdf->loadHtml("<h1>asu</h1>");
+        // $dompdf->render();
+        // $dompdf->stream("asu.pdf", array("Attachment" => false));
+    }
+
+// }
+
+// $image = QrCode::format('png')
+//                          ->merge(public_path('images/1644463030.png'), 0.5, true)
+//                          ->size(500)
+//                          ->errorCorrection('H')
+//                          ->generate('A simple example of QR code!');
+
+//         return response($image)->header('Content-type','image/png');
+
+  // phpinfo();
 
         // QRcode::png('https://localhost:8000/cek/surat/', 'qr.png');
 
@@ -62,21 +87,3 @@ class FrontController extends Controller
         // $qrCodes['withImage'] = QrCode::size(200)->format('png')->merge('/public/logo.png', .4)->generate('https://www.binaryboxtuts.com/');
 
         // return view('qrcode', compact('qrCodes'));
-    }
-
-    public function preview(){
-        $dompdf = new Dompdf(['pdfBackend' => 'GD']);
-        $dompdf->loadHtml("<h1>asu</h1>");
-        $dompdf->render();
-        $dompdf->stream("asu.pdf", array("Attachment" => false));
-    }
-
-}
-
-// $image = QrCode::format('png')
-//                          ->merge(public_path('images/1644463030.png'), 0.5, true)
-//                          ->size(500)
-//                          ->errorCorrection('H')
-//                          ->generate('A simple example of QR code!');
-
-//         return response($image)->header('Content-type','image/png');

@@ -122,7 +122,7 @@
     <hr class="line"/>
     <div class="container">
         <h3 class="judul">SURAT KETERANGAN TIDAK MAMPU</h3>
-        <p style="text-align: center; margin-top: 0; padding: 0; margin-bottom: 20px;">Nomor. 141.1/ /424.302.2.10/2023</p>
+        <p style="text-align: center; margin-top: 0; padding: 0; margin-bottom: 20px;">Nomor. 141.1/{{$indeks[$ps->id]+1}}/424.302.2.10/2023</p>
         <p style="padding: 0 50px 0 50px">Yang bertanda tangan dibawah ini Kepala Desa Kedungringin, Kecamatan Beji, Kabupaten Pasuruan menerangkan bahwa :</p>
 
         <table style="padding: 0 90px 0 80px; width: 100%; border-collapse: collapse;">
@@ -175,11 +175,12 @@
         <br>
         <br>
         <br>
-        <div class="qr-container">
-            <img style="width: 20px" src="logo.png" class="lego" alt="">
-            <img class="object-a" src="data:image/png;base64, {!! base64_encode(QrCode::size(100)->generate('http://127.0.0.1:8000/cek/surat/'.$list->id)) !!} ">
-        </div>
-            {{-- <div class="object-a">{!! $qrCodes !!}</div> --}}
+            @if ($ps->status == "Selesai")
+                <div class="qr-container">
+                    <img style="width: 20px" src="logo.png" class="lego" alt="">
+                    <img class="object-a" src="data:image/png;base64, {!! base64_encode(QrCode::size(100)->generate('http://127.0.0.1:8000/cek/surat/'.$list->id)) !!} ">
+                </div>
+            @endif
         <br>
         <br>
         <p style="margin-top: 20px;"><u><b>RISKY WAHYUNI, SH</b></u></p>
