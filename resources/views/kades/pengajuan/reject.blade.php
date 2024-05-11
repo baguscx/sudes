@@ -39,10 +39,10 @@
                                                 <i class="dw dw-more"></i>
                                             </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list" >
-                                            <a class="dropdown-item" href="{{route('kades.pengajuan.show', $detailSurat->id)}}" >
+                                            {{-- <a class="dropdown-item" href="{{route('kades.pengajuan.show', $detailSurat->id)}}" >
                                                 <i class="dw dw-eye"></i> Cek
-                                            </a>
-                                            @if($pengajuan->status == 'Selesai')
+                                            </a> --}}
+                                            {{-- @if($pengajuan->status == 'Selesai')
                                                 <a class="dropdown-item" href="{{route('unduh.surat', $detailSurat->id)}}">
                                                     <i class="dw dw-download"></i> Download
                                                 </a>
@@ -50,7 +50,7 @@
                                                 <a class="dropdown-item">
                                                     <i class="dw dw-download"></i> Download❎
                                                 </a>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         </div>
                                     </td>

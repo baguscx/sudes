@@ -36,8 +36,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified', 'role:kades'])->group(function () {
     Route::get('kades', [KadesController::class, 'dashboard'])->name('kades.dashboard');
     Route::get('kades/list', [KadesController::class, 'list'])->name('kades.pengajuan.list');
+    Route::get('kades/reject', [KadesController::class, 'reject'])->name('kades.pengajuan.reject');
     Route::get('kades/berkas/{id}', [KadesController::class, 'berkas'])->name('kades.pengajuan.berkas');
-    Route::put('kades/pengajuan/{id}', [KadesController::class, 'confirm'])->name('kades.pengajuan.confirm');
+    Route::put('kades/pengajuan/acc/{id}', [KadesController::class, 'acc'])->name('kades.pengajuan.acc');
+    Route::put('kades/pengajuan/rej/{id}', [KadesController::class, 'rej'])->name('kades.pengajuan.rej');
     Route::resource('kades/pengajuan', KadesController::class)->names([
         'index' => 'kades.pengajuan.index',
         'create' => 'kades.pengajuan.create',

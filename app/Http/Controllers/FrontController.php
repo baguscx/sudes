@@ -27,7 +27,7 @@ class FrontController extends Controller
         \Carbon\Carbon::setLocale('id');
         $list = DetailSurat::where('id', $id)->first();
         $ps = PengajuanSurat::where('id', $list->pengajuan_surat_id)->first();
-        $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai', 'Ditolak'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
         $indeks = array_flip($selesaiStatus);
 
         $user = User::where('id', $list->users_id)->first();

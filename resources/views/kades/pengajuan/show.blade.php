@@ -5,29 +5,36 @@
         <div class="row">
             <div class="col-xl-8 mb-30">
                 <div class="card-box height-100-p pd-20">
-                    <iframe src="data:application/pdf;base64,{{ base64_encode($pdfContent) }}" width="100%" height="100%" frameborder="0"></iframe>
+                    <div style="width: 100%; height: 100vh">
+                        <iframe src="data:application/pdf;base64,{{ base64_encode($pdfContent) }}" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
                 </div>
             </div>
             <div class="col-xl-4 mb-30">
                 <div class="card-box height-100-p pd-20">
                     <h2 class="h4 mb-20">Aksi</h2>
-                    <form action="" method="post">
+                    <form action="{{route('kades.pengajuan.acc', $list->id)}}" method="post">
                         @csrf
                         @method('PUT')
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <select name="status" class="custom-select col-12" onchange="showCard(this.value);">
-                                    <option selected="">Konfirmasi...</option>
-                                    <option value="Dikonfirmasi">Setujui</option>
-                                    <option value="Ditolak">Tolak</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div id="note" class="form-group" style="display: none;">
-                            <label>Keterangan</label>
-                            <textarea name="keterangan" class="form-control" rows="4" cols="50"></textarea>
-                        </div>
-                        <x-button.primary-button>Konfirmasi</x-button.primary-button>
+                        @if ($ps->status == 'Selesai')
+                            <small>
+                                Surat ini sudah selesai
+                            </small>
+                        @else
+                            <x-button.primary-button >SETUJUI</x-button.primary-button>
+                        @endif
+                    </form>
+                    <br>
+                    <form action="{{route('kades.pengajuan.rej', $list->id)}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        @if ($ps->status == 'Selesai')
+                            <small>
+                                Surat ini sudah selesai
+                            </small>
+                        @else
+                            <x-button.primary-button width="100%">TOLAK</x-button.primary-button>
+                        @endif
                     </form>
                 </div>
             </div>

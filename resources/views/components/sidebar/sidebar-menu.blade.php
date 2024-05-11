@@ -13,7 +13,8 @@
             </a>
             <ul class="submenu">
                 <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.pengajuan.index')}}" icon="" title="Belum di Tanda Tangani" />
-                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.pengajuan.list')}}" icon="" title="Belum di Tanda Tangani" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.pengajuan.list')}}" icon="" title="Sudah di Tanda Tangani" />
+                <x-menu.sidebar-menu-item class="no-arrow" link="{{route('kades.pengajuan.reject')}}" icon="" title="Ditolak" />
                 {{-- <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.pengajuan.history')}}" icon="" title="Riwayat" /> --}}
             </ul>
         </li>

@@ -29,31 +29,48 @@ class KadesController extends Controller
 
     public function show(string $id)
     {
-        $pdf = Pdf::loadView('front.pdf');
+        setlocale(LC_TIME, 'id_ID');
+        \Carbon\Carbon::setLocale('id');
+        $list = DetailSurat::where('id', $id)->first();
+        $ps = PengajuanSurat::where('id', $list->pengajuan_surat_id)->first();
+        $selesaiStatus = PengajuanSurat::whereIn('status', ['Dikonfirmasi', 'Selesai'])->orderBy('created_at', 'asc')->pluck('id')->toArray();
+        $indeks = array_flip($selesaiStatus);
+        $user = User::where('id', $list->users_id)->first();
+        $qrCodes = QrCode::size(120)->generate('https://localhost:8000/cek/surat/'.$list->id);
+        $pdf = Pdf::loadView('front.unduh', compact('list', 'ps', 'user', 'qrCodes', 'indeks'))->setPaper('a4', 'potrait');
 
-        return view('kades.pengajuan.show', ['pdfContent' => $pdf->output()]);
+        if($list->jenis_surat == 'Surat Keterangan Usaha'){
+            return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if($list->jenis_surat == 'Surat Keterangan Domisili'){
+            return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if($list->jenis_surat == 'Surat Keterangan Kematian'){
+            return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        } else if($list->jenis_surat == 'Surat Keterangan Tidak Mampu'){
+            return view('kades.pengajuan.show', ['pdfContent' => $pdf->output(), 'ps' => $ps, 'list' => $list]);
+        }
+
+        // return view('kades.pengajuan.show', ['pdfContent' => $pdf->output()]);
     }
 
-    public function confirm(Request $request,string $id)
+    public function acc(Request $request,string $id)
     {
         $detailSurat = DetailSurat::where('id', $id)->first();
+        $pengajuanSurat = PengajuanSurat::where('id', $detailSurat->pengajuan_surat_id)->first();
+        $pengajuanSurat->status = 'Selesai';
+        $pengajuanSurat->save();
+        Alert::success('Sukses!', 'Surat Berhasil disetujui');
+        return redirect(route('kades.pengajuan.index', $id));
+    }
 
-        if($request->status == 'Dikonfirmasi')
-        {
-            $pengajuanSurat = PengajuanSurat::where('id', $detailSurat->pengajuan_surat_id)->first();
-            $pengajuanSurat->status = 'Dikonfirmasi';
-            $pengajuanSurat->save();
-            Alert::success('Sukses!', 'Surat Berhasil disetujui');
-            return redirect(route('kades.pengajuan.index', $id));
-        } elseif ($request->status == 'Ditolak') {
-            $pengajuanSurat = PengajuanSurat::where('id', $detailSurat->pengajuan_surat_id)->first();
-            $pengajuanSurat->keterangan = $request->keterangan;
-            $pengajuanSurat->status = 'Ditolak';
-            $pengajuanSurat->save();
-            Alert::success('Sukses!', 'Surat Berhasil ditolak');
-            return redirect(route('kades.pengajuan.index', $id));
-
-        }
+    public function rej(Request $request,string $id)
+    {
+        $detailSurat = DetailSurat::where('id', $id)->first();
+        $pengajuanSurat = PengajuanSurat::where('id', $detailSurat->pengajuan_surat_id)->first();
+        $pengajuanSurat->keterangan = $request->keterangan;
+        $pengajuanSurat->status = 'Ditolak';
+        $pengajuanSurat->save();
+        Alert::success('Sukses!', 'Surat Berhasil ditolak');
+        return redirect(route('kades.pengajuan.index', $id));
 
     }
 
@@ -70,6 +87,15 @@ class KadesController extends Controller
                             ->get();
 
         return view('kades.pengajuan.list', compact('pengajuanSurat'));
+    }
+
+        public function reject()
+    {
+        $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
+                            ->whereIn('status', ['Ditolak'])
+                            ->get();
+
+        return view('kades.pengajuan.reject', compact('pengajuanSurat'));
     }
 
     public function berkas($id){
