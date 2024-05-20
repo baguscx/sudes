@@ -76,7 +76,7 @@
                 </a>
             </div>
         </div>
-        <div class="user-notification">
+        {{-- <div class="user-notification">
             <div class="dropdown">
                 <a
                     class="dropdown-toggle no-arrow"
@@ -154,7 +154,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="user-info-dropdown">
             <div class="dropdown">
                 <a

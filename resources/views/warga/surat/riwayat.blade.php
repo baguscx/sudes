@@ -40,6 +40,11 @@
                                     <td>
                                         <i>Pengajuan Ditolak</i>
                                     </td>
+                                @elseif ($pengajuan->status == 'Dikonfirmasi')
+                                    <td class="text-primary">{{$pengajuan->status}}</td>
+                                    <td>
+                                        <i>Menunggu Acc Kades</i>
+                                    </td>
                                 @elseif ($pengajuan->status == 'Selesai')
                                     <td class="text-success">{{$pengajuan->status}}</td>
                                     <td>

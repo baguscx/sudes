@@ -86,8 +86,8 @@
 			>
 				<div class="brand-logo">
 					<a href="{{url('/')}}">
-						{{-- <img src="{{asset('vendors/images/deskapp-logo.svg')}}" alt="" /> --}}
-                        <p class="text-dark fs-2 text-uppercase fw-bold">E - Surat Desa</p>
+						<img src="{{asset('vendors/images/deskapp-logo.svg')}}" alt="" />
+                        {{-- <p class="text-dark fs-2 text-uppercase fw-bold">E - Surat Desa</p> --}}
 					</a>
 				</div>
 			</div>
