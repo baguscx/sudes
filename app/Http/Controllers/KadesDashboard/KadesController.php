@@ -9,6 +9,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -22,7 +23,7 @@ class KadesController extends Controller
     {
         $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
                     ->whereIn('status', ['Dikonfirmasi'])
-                    ->get();
+                    ->latest()->get();
 
         return view('kades.pengajuan.index', compact('pengajuanSurat'));
     }
@@ -84,7 +85,7 @@ class KadesController extends Controller
     {
         $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
                             ->whereIn('status', ['Selesai'])
-                            ->get();
+                            ->latest()->get();
 
         return view('kades.pengajuan.list', compact('pengajuanSurat'));
     }
@@ -93,7 +94,7 @@ class KadesController extends Controller
     {
         $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
                             ->whereIn('status', ['Ditolak'])
-                            ->get();
+                            ->latest()->get();
 
         return view('kades.pengajuan.reject', compact('pengajuanSurat'));
     }
@@ -115,5 +116,20 @@ class KadesController extends Controller
         $content = $pdf->download()->getOriginalContent();
         Storage::put('public/temp/bubla.pdf', $content);
 
+    }
+
+
+    public function ttd(Request $request, $id){
+        if(Hash::check($request->ttd, Auth::user()->password))
+        {
+            $pengajuan = PengajuanSurat::find($id);
+            $pengajuan->status = "Selesai";
+            $pengajuan->save();
+        } else {
+            return "salah";
+        }
+
+        Alert::success('Sukses!', 'Surat Berhasil Ditandatangani');
+        return redirect()->route('kades.pengajuan.list');
     }
 }

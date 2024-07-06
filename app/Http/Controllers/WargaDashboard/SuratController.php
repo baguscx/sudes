@@ -46,7 +46,7 @@ class SuratController extends Controller
             [
                 'users_id' => Auth::user()->id,
                 'tanggal_pengajuan' => date('Y-m-d'),
-                'status' => 'Draft',
+                'status' => 'Diproses',
             ]);
 
             if($request->jenis_surat == 'skd'){
@@ -153,7 +153,7 @@ class SuratController extends Controller
                 ]);
             }
         Alert::success('Sukses!', 'Surat Berhasil Dibuat');
-        return redirect()->route('warga.surat.draft');
+        return redirect()->route('warga.surat.riwayat');
     }
 
     /**
@@ -286,7 +286,7 @@ class SuratController extends Controller
             }
 
         Alert::success('Sukses!', 'Surat Berhasil DiEdit');
-        return redirect()->route('warga.surat.draft');
+        return redirect()->route('warga.surat.riwayat');
     }
 
     /**
@@ -306,7 +306,7 @@ class SuratController extends Controller
         $pengajuanSurat->delete();
         $detailSurat->delete();
         Alert::success('Sukses!', 'Surat Berhasil Dihapus');
-        return redirect()->route('warga.surat.draft');
+        return redirect()->route('warga.surat.riwayat');
     }
 
     public function pdf(String $id)
@@ -322,7 +322,7 @@ class SuratController extends Controller
 
     public function riwayat()
     {
-        $pengajuanSurat = PengajuanSurat::where('users_id', Auth::user()->id)->whereIn('status', ['Diproses', 'Dikonfirmasi', 'Selesai', 'Ditolak'])->with('detail_surats')->get();
+        $pengajuanSurat = PengajuanSurat::where('users_id', Auth::user()->id)->whereIn('status', ['Diproses', 'Dikonfirmasi', 'Selesai', 'Ditolak'])->with('detail_surats')->latest()->get();
         return view('warga.surat.riwayat', compact( 'pengajuanSurat'));
     }
 
@@ -346,6 +346,6 @@ class SuratController extends Controller
             'status' => 'Diproses',
         ]);
         Alert::success('Sukses!', 'Surat Berhasil Dikirim');
-        return redirect()->route('warga.surat.draft');
+        return redirect()->route('warga.surat.riwayat');
     }
 }

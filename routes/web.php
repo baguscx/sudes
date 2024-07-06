@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified', 'role:kades'])->group(function () {
     Route::get('kades/berkas/{id}', [KadesController::class, 'berkas'])->name('kades.pengajuan.berkas');
     Route::put('kades/pengajuan/acc/{id}', [KadesController::class, 'acc'])->name('kades.pengajuan.acc');
     Route::put('kades/pengajuan/rej/{id}', [KadesController::class, 'rej'])->name('kades.pengajuan.rej');
+    Route::post('kades/ttd/{id}', [KadesController::class, 'ttd'])->name('kades.pengajuan.ttd');
     Route::resource('kades/pengajuan', KadesController::class)->names([
         'index' => 'kades.pengajuan.index',
         'create' => 'kades.pengajuan.create',

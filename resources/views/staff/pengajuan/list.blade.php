@@ -32,7 +32,23 @@
                                 @foreach($pengajuan->detail_surats as $detailSurat)
                                     <td>{{$pengajuan->users->detail_users->nik}}</td>
                                     <td>{{$detailSurat->jenis_surat}}</td>
-                                    <td>{{$pengajuan->status}}</td>
+                                        @if ($pengajuan->status == 'Diproses')
+                                            <td class="text-primary">
+                                                <span class="badge badge-secondary">Proses</span>
+                                            </td>
+                                        @elseif ($pengajuan->status == 'Ditolak')
+                                            <td class="text-danger">
+                                                <span class="badge badge-danger">Ditolak</span>
+                                            </td>
+                                        @elseif ($pengajuan->status == 'Dikonfirmasi')
+                                            <td class="text-primary">
+                                                <span class="badge badge-primary">Ttd</span>
+                                            </td>
+                                        @elseif ($pengajuan->status == 'Selesai')
+                                            <td class="text-success">
+                                                <span class="badge badge-success">Selesai</span>
+                                            </td>
+                                        @endif
                                     <td>
                                         <div class="dropdown" >
                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" >
@@ -45,10 +61,6 @@
                                             @if($pengajuan->status == 'Selesai')
                                                 <a class="dropdown-item" href="{{route('unduh.surat', $detailSurat->id)}}">
                                                     <i class="dw dw-download"></i> Download
-                                                </a>
-                                            @else
-                                                <a class="dropdown-item">
-                                                    <i class="dw dw-download"></i> Download❎
                                                 </a>
                                             @endif
                                         </div>

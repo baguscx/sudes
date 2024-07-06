@@ -13,7 +13,7 @@
             <div class="col-xl-4 mb-30">
                 <div class="card-box height-100-p pd-20">
                     <h2 class="h4 mb-20">Aksi</h2>
-                    <form action="{{route('kades.pengajuan.acc', $list->id)}}" method="post">
+                    {{-- <form action="{{route('kades.pengajuan.acc', $list->id)}}" method="post">
                         @csrf
                         @method('PUT')
                         @if ($ps->status == 'Selesai')
@@ -21,11 +21,12 @@
                                 Surat ini sudah selesai
                             </small>
                         @else
-                            <x-button.primary-button >SETUJUI</x-button.primary-button>
+                        <x-button.primary-button >SETUJUI</x-button.primary-button>
                         @endif
-                    </form>
+                    </form> --}}
+                    <button data-toggle="modal" data-target="#passwordModal" class="btn btn-primary btn-block mb-2">Tanda Tangani</button>
                     <br>
-                    <form action="{{route('kades.pengajuan.rej', $list->id)}}" method="post">
+                    {{-- <form action="{{route('kades.pengajuan.rej', $list->id)}}" method="post">
                         @csrf
                         @method('PUT')
                         @if ($ps->status == 'Selesai')
@@ -35,8 +36,35 @@
                         @else
                             <x-button.primary-button width="100%">TOLAK</x-button.primary-button>
                         @endif
+                    </form> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">Masukkan Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('kades.pengajuan.ttd', $ps->id)}}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="passwordInput">Password</label>
+                            <input name="ttd" type="password" class="form-control" id="passwordInput" placeholder="Masukkan password">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Konfirmasi</button>
+                        </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>

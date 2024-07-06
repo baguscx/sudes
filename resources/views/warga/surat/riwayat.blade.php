@@ -29,39 +29,61 @@
                             @foreach($pengajuan->detail_surats as $detailSurat)
                                 <td>{{$detailSurat->nama}}</td>
                                 <td>{{$detailSurat->jenis_surat}}</td>
-
                                 @if ($pengajuan->status == 'Diproses')
-                                    <td class="text-primary">{{$pengajuan->status}}</td>
+                                    <td class="text-primary">
+                                        <span class="badge badge-secondary">Proses</span>
+                                    </td>
                                     <td>
-                                        <i>Pengajuan Diproses</i>
+                                        <i class="small">Diproses Staff</i>
                                     </td>
                                 @elseif ($pengajuan->status == 'Ditolak')
-                                    <td class="text-danger">{{$pengajuan->status}}</td>
+                                    <td class="text-danger">
+                                        <span class="badge badge-danger">Ditolak</span>
+                                    </td>
                                     <td>
-                                        <i>Pengajuan Ditolak</i>
+                                        <button-sm data-toggle="modal" data-target="#passwordModal" id="openPopupBtn" class="btn-sm btn-danger"><i class="dw dw-eye"></i></button-sm>
                                     </td>
                                 @elseif ($pengajuan->status == 'Dikonfirmasi')
-                                    <td class="text-primary">{{$pengajuan->status}}</td>
+                                    <td class="text-primary">
+                                        <span class="badge badge-primary">Ttd</span>
+                                    </td>
                                     <td>
-                                        <i>Menunggu Acc Kades</i>
+                                        <i class="small">Menunggu Acc Kades</i>
                                     </td>
                                 @elseif ($pengajuan->status == 'Selesai')
-                                    <td class="text-success">{{$pengajuan->status}}</td>
+                                    <td class="text-success">
+                                        <span class="badge badge-success">Selesai</span>
+                                    </td>
                                     <td>
-                                        <div class="dropdown" >
+                                        <a  href="{{route('unduh.surat', $detailSurat->id)}}" ><button-sm class="btn-sm btn-success"><i class="icon-copy bi bi-download"></i></button-sm></a >
+                                        {{-- <div class="dropdown" >
                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" >
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list" >
-
                                                 <a class="dropdown-item" href="{{route('unduh.surat', $detailSurat->id)}}" ><i class="dw dw-download"></i> Download</a >
-
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </td>
                                 @endif
                             </tr>
                             @endforeach
+                        </tr>
+                            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="passwordModalLabel">Keterangan</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{$pengajuan->keterangan}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     @endif
                 </tbody>

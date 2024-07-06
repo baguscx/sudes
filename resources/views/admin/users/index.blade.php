@@ -1,4 +1,4 @@
-<x-app-layout>
+Pa<x-app-layout>
     <x-slot name="title">Dashboard</x-slot>
         <div class="xs-pd-20-10 pd-ltr-20">
             <div class="title pb-20">

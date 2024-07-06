@@ -19,7 +19,7 @@ class StaffController extends Controller
     {
         $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
                     ->whereIn('status', ['Diproses'])
-                    ->get();
+                    ->latest()->get();
 
         return view('staff.pengajuan.index', compact('pengajuanSurat'));
     }

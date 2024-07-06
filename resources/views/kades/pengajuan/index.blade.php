@@ -32,18 +32,24 @@
                                 @foreach($pengajuan->detail_surats as $detailSurat)
                                     <td>{{$pengajuan->users->detail_users->nik}}</td>
                                     <td>{{$detailSurat->jenis_surat}}</td>
-                                    <td>{{$pengajuan->status}}</td>
+                                    @if ($pengajuan->status == 'Dikonfirmasi')
+                                        <td class="text-primary">
+                                            <span class="badge badge-primary">Ttd</span>
+                                        </td>
+                                    @endif
                                     <td>
-                                        <div class="dropdown" >
+                                        <a  href="{{route('kades.pengajuan.show', $detailSurat->id)}}" ><button-sm class="btn-sm btn-primary"><i class="dw dw-eye"></i></button-sm></a >
+
+                                        {{-- <div class="dropdown" >
                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" >
                                                 <i class="dw dw-more"></i>
                                             </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list" >
-                                            <a class="dropdown-item" href="{{route('kades.pengajuan.show', $detailSurat->id)}}" >
-                                                <i class="dw dw-eye"></i> Cek
-                                            </a>
-                                        </div>
-                                        </div>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list" >
+                                                <a class="dropdown-item" href="{{route('kades.pengajuan.show', $detailSurat->id)}}" >
+                                                    <i class="dw dw-eye"></i> Cek
+                                                </a>
+                                            </div>
+                                        </div> --}}
                                     </td>
                                 @endforeach
                             </tr>

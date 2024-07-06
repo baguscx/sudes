@@ -32,7 +32,11 @@
                                 @foreach($pengajuan->detail_surats as $detailSurat)
                                     <td>{{$pengajuan->users->detail_users->nik}}</td>
                                     <td>{{$detailSurat->jenis_surat}}</td>
-                                    <td>{{$pengajuan->status}}</td>
+                                    @if ($pengajuan->status == 'Selesai')
+                                        <td class="text-success">
+                                            <span class="badge badge-success">Selesai</span>
+                                        </td>
+                                    @endif
                                     <td>
                                         <div class="dropdown" >
                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" >
