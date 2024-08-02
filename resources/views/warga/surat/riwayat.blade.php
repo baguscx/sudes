@@ -43,6 +43,21 @@
                                     <td>
                                         <button-sm data-toggle="modal" data-target="#passwordModal" id="openPopupBtn" class="btn-sm btn-danger"><i class="dw dw-eye"></i></button-sm>
                                     </td>
+                                    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="passwordModalLabel">Keterangan</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{$pengajuan->keterangan}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @elseif ($pengajuan->status == 'Dikonfirmasi')
                                     <td class="text-primary">
                                         <span class="badge badge-primary">Ttd</span>
@@ -69,21 +84,6 @@
                             </tr>
                             @endforeach
                         </tr>
-                            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="passwordModalLabel">Keterangan</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{$pengajuan->keterangan}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         @endforeach
                     @endif
                 </tbody>

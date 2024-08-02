@@ -38,8 +38,8 @@
                             <div><i class="icon-copy bi bi-envelope-plus" style="font-size: 50px;"></i></div>
                         </div>
                         <div class="widget-data">
-                            <div class="h4 mb-0">{{count($ps->where('status', 'Diproses'))}}</div>
-                            <div class="weight-600 font-14">Surat belum dikonfirmasi</div>
+                            <div class="h4 mb-0">{{count($ps->where('status', 'Dikonfirmasi'))}}</div>
+                            <div class="weight-600 font-14">Surat belum ditanda tangani</div>
                         </div>
                     </div>
                 </div>
@@ -51,8 +51,8 @@
                             <div><i class="icon-copy bi bi-envelope-dash" style="font-size: 50px;"></i></div>
                         </div>
                         <div class="widget-data">
-                            <div class="h4 mb-0">{{count($ps->whereIn('status', ['Dikonfirmasi', 'Selesai']))}}</div>
-                            <div class="weight-600 font-14">Surat sudah dikonfirmasi</div>
+                            <div class="h4 mb-0">{{count($ps->whereIn('status', ['Selesai']))}}</div>
+                            <div class="weight-600 font-14">Surat sudah ditanda tangani</div>
                         </div>
                     </div>
                 </div>

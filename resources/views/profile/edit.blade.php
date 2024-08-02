@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <x-input-label for="email" :value="__('Email')" />
@@ -123,7 +123,7 @@
                                     <x-input-error class="mt-2" :messages="$errors->get('password')" />
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="flex items-center gap-4">
                             <x-button.primary-button class="mt-2">Save</x-button.primary-button>
                             @if (session('status') === 'profile-updated')
