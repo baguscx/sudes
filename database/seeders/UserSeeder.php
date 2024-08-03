@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
         ])->assignRole('admin');
         DetailUser::create([
             'users_id' => $admin->id,
+            'status_akun' => 'Disetujui',
         ]);
 
         $kades = User::create([
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
         ])->assignRole('kades');
         DetailUser::create([
             'users_id' => $kades->id,
+            'status_akun' => 'Disetujui',
         ]);
 
         $staff = User::create([
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
         ])->assignRole('staff');
         DetailUser::create([
             'users_id' => $staff->id,
+            'status_akun' => 'Disetujui',
         ]);
 
         $warga = User::create([

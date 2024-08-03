@@ -3,6 +3,7 @@
         @if (auth()->user()->hasRole('admin'))
         {{-- <x-menu.sidebar-menu-item class="no-arrow {{request()->is('admin') ? 'active' : ''}}" link="{{route('admin.dashboard')}}" icon="micon bi bi-house" title="Home"/> --}}
         <x-menu.sidebar-menu-item class="no-arrow {{request()->is('admin/users') ? 'active' : ''}}" link="{{route('admin.users.index')}}" icon="micon bi bi-archive" title="Users"/>
+        <x-menu.sidebar-menu-item class="no-arrow {{request()->is('pengguna-baru') ? 'active' : ''}}" link="{{route('pengguna-baru')}}" icon="micon bi bi-person-plus" title="Pengguna Baru"/>
 
         @elseif (auth()->user()->hasRole('kades'))
         <x-menu.sidebar-menu-item class="no-arrow {{request()->is('kades') ? 'active' : ''}}" link="{{route('kades.dashboard')}}" icon="micon bi bi-house" title="Home"/>
@@ -32,6 +33,7 @@
                 {{-- <x-menu.sidebar-menu-item class="no-arrow" link="{{route('staff.pengajuan.history')}}" icon="" title="Riwayat" /> --}}
             </ul>
         </li>
+        <x-menu.sidebar-menu-item class="no-arrow {{request()->is('pengguna-baru') ? 'active' : ''}}" link="{{route('pengguna-baru')}}" icon="micon bi bi-person-plus" title="Pengguna Baru"/>
 
         @elseif (auth()->user()->hasRole('warga'))
         {{-- {{request()->is('proposal/*') ? 'active' : ''}} --}}

@@ -5,12 +5,13 @@ namespace App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DetailUserRequest;
 use App\Http\Requests\UserRequest;
-use App\Models\DetailUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Spatie\Permission\Models\Role;
+use App\Models\DetailUser;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -142,5 +143,31 @@ class UserController extends Controller
         $user = User::findOrFail($id); // Assuming User is your model class
         $user->delete();
         return redirect()->route('admin.users.index');
+    }
+
+    /**
+     * Get the users with empty/null status_akun.
+     */
+    public function baru()
+    {
+        $detailusers = DetailUser::whereNull('status_akun')->pluck('id');
+        $users = User::whereIn('id', $detailusers)->get();
+        return view('warga.baru.index', compact('users', 'detailusers'));
+    }
+
+    public function baru_detail(String $id)
+    {
+        $user = User::findOrFail($id);
+        $detailuser = DetailUser::where('users_id', $id)->first();
+        return view('warga.baru.detail', compact('user', 'detailuser'));
+    }
+
+    public function baru_konfirmasi(String $id)
+    {
+        $detailUser = DetailUser::findOrFail($id);
+        $detailUser->update(['status_akun' => 'Disetujui']);
+
+        Alert::success('Berhasil', 'Pengguna berhasil disetujui');
+        return redirect()->route('pengguna-baru');
     }
 }

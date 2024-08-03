@@ -101,4 +101,10 @@ Route::middleware(['auth', 'verified', 'role:warga'])->group(function () {
     Route::get('warga/surat/pdf/{id}', [SuratController::class, 'pdf'])->name('warga.surat.pdf');
 });
 
+Route::middleware(['auth', 'verified', 'role:staff|admin'])->group(function () {
+    Route::get('/pengguna-baru', [UserController::class, 'baru'])->name('pengguna-baru');
+    Route::get('/pengguna-baru/{id}', [UserController::class, 'baru_detail'])->name('pengguna-baru.detail');
+    Route::post('/pengguna-baru/{id}', [UserController::class, 'baru_konfirmasi'])->name('pengguna-baru.konfirmasi');
+});
+
 require __DIR__.'/auth.php';

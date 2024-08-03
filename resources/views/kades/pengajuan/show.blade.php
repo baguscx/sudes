@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="title">Dashboard</x-slot>
-        @include('sweetalert::alert')
     <div class="pd-ltr-20">
         <div class="row">
             <div class="col-xl-8 mb-30">

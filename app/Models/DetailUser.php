@@ -19,6 +19,11 @@ class DetailUser extends Model
         'born_date',
         'phone_number',
         'address',
+        'rt',
+        'rw',
+        'status_perkawinan',
+        'ktp',
+        'status_akun',
     ];
 
     public function users(){

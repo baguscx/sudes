@@ -91,6 +91,7 @@
 		<!-- End Google Tag Manager -->
 	</head>
 	<body>
+        @include('sweetalert::alert')
         {{-- <x-loader /> --}}
         <x-header />
         <x-sidebar.right-sidebar />

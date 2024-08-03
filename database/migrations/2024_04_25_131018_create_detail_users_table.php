@@ -23,6 +23,11 @@ return new class extends Migration
             $table->date('born_date')->nullable();
             $table->string('phone_number')->nullable();
             $table->longText('address')->nullable();
+            $table->string('rt')->nullable();
+            $table->string('rw')->nullable();
+            $table->string('status_perkawinan')->nullable();
+            $table->string('ktp')->nullable();
+            $table->enum('status_akun', ['Disetujui', 'Ditolak'])->nullable();
             $table->timestamps();
         });
     }

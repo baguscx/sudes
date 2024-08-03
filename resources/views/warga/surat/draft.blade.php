@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="title">Draft</x-slot>
-        @include('sweetalert::alert')
     <!-- Simple Datatable start -->
     <div class="card-box mb-30">
         <div class="pd-20">

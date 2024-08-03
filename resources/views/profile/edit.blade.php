@@ -100,14 +100,51 @@
                                     </select>
                                 </div>
                             </div> --}}
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Address :</label>
-                                    <textarea id="address" name="address" class="form-control" required autocomplete="address">@if ($user->detail_users && $user->detail_users->photo != null) {{ $user->detail_users()->first()->address }} @else {{ old('address') }} @endif</textarea>
-                                    <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Dusun</label>
+                                        <select name="address" class="form-control">
+                                            <option>Pilih Dusun</option>
+                                            <option value="Gersikan">Gersikan</option>
+                                            <option value="Ngayunan Barat">Ngayunan Barat</option>
+                                            <option value="Ngayunan Timur">Ngayunan Timur</option>
+                                            <option value="Kedungringin Utara">Kedungringin Utara</option>
+                                            <option value="Kedungringin Tengah">Kedungringin Tengah</option>
+                                            <option value="Kedungringin Selatan">Kedungringin Selatan</option>
+                                            <option value="Guyangan">Guyangan</option>
+                                            <option value="Bahrowo">Bahrowo</option>
+                                            <option value="Balungrejo">Balungrejo</option>
+                                            <option value="Ngampel">Ngampel</option>
+                                        </select>
+                                        <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>RT</label>
+                                        <select name="rt" class="form-control">
+                                            <option>RT</option>
+                                            @for ($i = 1; $i <= 23; $i++)
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>RW</label>
+                                        <select name="rw" class="form-control">
+                                            <option>RW</option>
+                                            @for ($i = 1; $i <= 10; $i++)
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                         {{-- <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
