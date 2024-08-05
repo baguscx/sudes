@@ -45,6 +45,14 @@
                                     <td>{{ $detailuser->status_perkawinan ?? 'Belum Diisi' }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Pekerjaan</td>
+                                    <td>{{ $detailuser->pekerjaan ?? 'Belum Diisi' }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Kewarganegaraan</td>
+                                    <td>{{ $detailuser->kewarganegaraan ?? 'Belum Diisi' }}</td>
+                                </tr>
+                                <tr>
                                     <td>KTP</td>
                                     <td>
                                         @if (isset($detailuser->ktp))
@@ -54,6 +62,7 @@
                                         @endif
                                     </td>
                                 </tr>
+
                             </tbody>
                         </table>
 

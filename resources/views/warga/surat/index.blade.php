@@ -6,6 +6,14 @@
             Lengkapi data diri anda terlebih dahulu sebelum membuat surat.
             <a href="{{route('profile.edit')}}">Klik disini</a>
         </div>
+    @elseif(Auth::user()->detail_users->status_akun == null)
+        <div class="alert alert-warning" role="alert">
+            Akun anda sedang ditinjau oleh staff.
+        </div>
+    @elseif(Auth::user()->detail_users->status_akun == 'Ditolak')
+        <div class="alert alert-warning" role="alert">
+            Akun anda tidak diperbolehkan membuat surat.
+        </div>
     @else
         <div class="pd-20 card-box mb-30">
             <div class="clearfix">

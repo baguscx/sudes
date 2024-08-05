@@ -42,7 +42,7 @@
     <tr>
         <td width="30%">Warganegara </td>
         <td width="1%">:</td>
-        <td>{{ $detailSurat->warganegara ?? '' }}</td>
+        <td>{{ $detailSurat->kewarganegaraan ?? '' }}</td>
     </tr>
     <tr>
         <td width="30%">Alamat </td>

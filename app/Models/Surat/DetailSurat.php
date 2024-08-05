@@ -21,7 +21,7 @@ class DetailSurat extends Model
             'agama',
             'tempat_lahir',
             'tanggal_lahir',
-            'warganegara',
+            'kewarganegaraan',
             'pendidikan',
             'pekerjaan',
             'status_pernikahan',

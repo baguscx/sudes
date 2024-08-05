@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('agama', ['Islam', 'Kristen', 'Hindu', 'Budha', 'Konghucu'])->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
-            $table->string('warganegara')->nullable();
+            $table->string('kewarganegaraan')->nullable();
             $table->string('pendidikan')->nullable();
             $table->string('pekerjaan')->nullable();
             $table->enum('status_pernikahan', ['Belum Menikah', 'Menikah', 'Pernah Menikah'])->nullable();

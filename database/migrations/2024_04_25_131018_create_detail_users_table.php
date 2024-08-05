@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('rw')->nullable();
             $table->string('status_perkawinan')->nullable();
             $table->string('ktp')->nullable();
+            $table->string('pekerjaan')->nullable();
+            $table->string('kewarganegaraan')->nullable();
             $table->enum('status_akun', ['Disetujui', 'Ditolak'])->nullable();
             $table->timestamps();
         });

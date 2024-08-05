@@ -144,8 +144,8 @@
             <td style="text-align: left; padding-left: 10px;">: {{$list->gender ?? ''}}</td>
             </tr>
             <tr>
-            <td style="text-align: left;">Warganegara / Agama</td>
-            <td style="text-align: left; padding-left: 10px;">: {{$list->warganegara.' / '.$list->agama ?? ''}}</td>
+            <td style="text-align: left;">Kewarganegaraan / Agama</td>
+            <td style="text-align: left; padding-left: 10px;">: {{$list->kewarganegaraan.' / '.$list->agama ?? ''}}</td>
             </tr>
             <tr>
             <td style="text-align: left;">Pekerjaan</td>

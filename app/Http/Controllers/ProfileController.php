@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 
 class ProfileController extends Controller
@@ -47,9 +48,21 @@ class ProfileController extends Controller
             }
         }
 
+        if(isset($dataDetailUser['ktp'])){
+            $data = 'storage/'.$get_photo['ktp'];
+            if (File::exists($data)) {
+                File::delete($data);
+            } else {
+                File::delete('storage/app/public/'.$get_photo['ktp']);
+            }
+        }
+
         //store file to storage
         if(isset($dataDetailUser['photo'])){
             $dataDetailUser['photo'] = $detailUserRequest->file('photo')->store('assets/photo', 'public');
+        }
+        if(isset($dataDetailUser['ktp'])){
+            $dataDetailUser['ktp'] = $detailUserRequest->file('ktp')->store('assets/ktp', 'public');
         }
 
         $user = User::findOrFail(Auth::user()->id);
@@ -67,6 +80,7 @@ class ProfileController extends Controller
         $detailUser = DetailUser::where('users_id', Auth::user()->id)->firstOrFail();
         $detailUser->update($dataDetailUser);
 
+        Alert::success('Success', 'Profile updated successfully!');
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 

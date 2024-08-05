@@ -33,6 +33,13 @@ class DetailUserRequest extends FormRequest
             'phone_number' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string', ],
             'role' => ['nullable', 'string', 'max:255'],
+            'rt' => ['nullable', 'string', 'max:255'],
+            'rw' => ['nullable', 'string', 'max:255'],
+            'status_perkawinan' => ['nullable', 'string', 'max:255'],
+            'ktp' => ['nullable', 'image', 'max:1024'],
+            'pekerjaan' => ['nullable', 'string', 'max:255'],
+            'kewarganegaraan' => ['nullable', 'string', 'max:255'],
+
         ];
     }
 }

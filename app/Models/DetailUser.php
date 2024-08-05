@@ -24,6 +24,8 @@ class DetailUser extends Model
         'status_perkawinan',
         'ktp',
         'status_akun',
+        'pekerjaan',
+        'kewarganegaraan',
     ];
 
     public function users(){

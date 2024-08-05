@@ -71,9 +71,9 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <x-input-label>Warganegara : </x-input-label>
-                                <x-text-input value="{{ old('warganegara', $detailSurat?->warganegara) }}" name="warganegara" type="text" class="form-control" />
-                                <x-input-error class="mt-2" :messages="$errors->get('warganegara')" />
+                                <x-input-label>Kewarganegaraan : </x-input-label>
+                                <x-text-input value="{{ old('kewarganegaraan', $detailSurat?->kewarganegaraan) }}" name="kewarganegaraan" type="text" class="form-control" />
+                                <x-input-error class="mt-2" :messages="$errors->get('kewarganegaraan')" />
                             </div>
                         </div>
 

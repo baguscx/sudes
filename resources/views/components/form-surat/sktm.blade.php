@@ -12,7 +12,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <x-input-label>Nama : </x-input-label>
-                                <x-text-input value="{{ old('nama') }}" name="nama" type="text" class="form-control" />
+                                <x-text-input value="{{ old('name', Auth::user()->name ?? '') }}" name="nama" type="text" class="form-control"/>
                                 <x-input-error class="mt-2" :messages="$errors->get('nama')" />
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <x-input-label>NIK : </x-input-label>
-                                <x-text-input value="{{ old('nik') }}" name="nik" type="text" class="form-control" />
+                                <x-text-input value="{{ old('nik', Auth::user()->detail_users->nik ?? '') }}" name="nik" type="text" class="form-control"/>
                                 <x-input-error class="mt-2" :messages="$errors->get('nik')" />
                             </div>
                         </div>
@@ -30,8 +30,8 @@
                                 <label>Jenis Kelamin :</label>
                                 <select name="gender" class="form-control">
                                     <option>Pilih Jenis Kelamin</option>
-                                    <option value="Laki - Laki">Laki - laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option {{Auth::user()->detail_users->gender == 'laki-laki' ? 'selected' : ''}} value="Laki - Laki">Laki - laki</option>
+                                    <option {{Auth::user()->detail_users->gender == 'perempuan' ? 'selected' : ''}} value="Perempuan">Perempuan</option>
                                 </select>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <x-input-label>Tempat Lahir : </x-input-label>
-                                <x-text-input value="{{ old('tempat_lahir') }}" name="tempat_lahir" type="text" class="form-control" />
+                                <x-text-input value="{{ old('tempat_lahir', Auth::user()->detail_users->born_place) }}" name="tempat_lahir" type="text" class="form-control"/>
                                 <x-input-error class="mt-2" :messages="$errors->get('tempat_lahir')" />
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <x-input-label>Tanggal Lahir : </x-input-label>
-                                <x-text-input value="{{ old('tanggal_lahir') }}" name="tanggal_lahir" type="date" class="form-control" />
+                                <x-text-input value="{{ old('tanggal_lahir', Auth::user()->detail_users->born_date) }}" name="tanggal_lahir" type="date" class="form-control"/>
                                 <x-input-error class="mt-2" :messages="$errors->get('tanggal_lahir')" />
                             </div>
                         </div>
@@ -56,12 +56,12 @@
                             <div class="form-group">
                                 <x-input-label>Agama : </x-input-label>
                                 <select name="agama" class="form-control">
-                                    <option>Pilih Jenis Kelamin</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Budha">Budha</option>
-                                    <option value="Konghucu">Konghucu</option>
+                                    <option>Pilih Agama</option>
+                                    <option {{Auth::user()->detail_users->religion == 'islam' ? 'selected' : ''}} value="Islam">Islam</option>
+                                    <option {{Auth::user()->detail_users->religion == 'kristen' ? 'selected' : ''}} value="Kristen">Kristen</option>
+                                    <option {{Auth::user()->detail_users->religion == 'hindu' ? 'selected' : ''}} value="Hindu">Hindu</option>
+                                    <option {{Auth::user()->detail_users->religion == 'budha' ? 'selected' : ''}} value="Budha">Budha</option>
+                                    <option {{Auth::user()->detail_users->religion == 'konghucu' ? 'selected' : ''}} value="Konghucu">Konghucu</option>
                                 </select>
                                 <x-input-error class="mt-2" :messages="$errors->get('agama')" />
                             </div>
@@ -69,16 +69,16 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <x-input-label>Warganegara : </x-input-label>
-                                <x-text-input value="{{ old('warganegara') }}" name="warganegara" type="text" class="form-control" />
-                                <x-input-error class="mt-2" :messages="$errors->get('warganegara')" />
+                                <x-input-label>Kewarganegaraan : </x-input-label>
+                                <x-text-input value="{{ old('kewarganegaraan', Auth::user()->detail_users->kewarganegaraan) }}" name="kewarganegaraan" type="text" class="form-control"/>
+                                <x-input-error class="mt-2" :messages="$errors->get('kewarganegaraan')" />
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <x-input-label>Pekerjaan : </x-input-label>
-                                <x-text-input value="{{ old('pekerjaan') }}" name="pekerjaan" type="text" class="form-control" />
+                                <x-text-input value="{{ old('pekerjaan', Auth::user()->detail_users->pekerjaan) }}" name="pekerjaan" type="text" class="form-control"/>
                                 <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
                             </div>
                         </div>
@@ -88,9 +88,9 @@
                                 <label>Status Pernikahan :</label>
                                 <select name="status_pernikahan" class="form-control">
                                     <option>Pilih Status Pernikahan</option>
-                                    <option value="Belum Menikah">Belum Menikah</option>
-                                    <option value="Menikah">Menikah</option>
-                                    <option value="Pernah Menikah">Pernah Menikah</option>
+                                    <option {{Auth::user()->detail_users->status_perkawinan == 'belum' ? 'selected' : ''}} value="Belum Menikah">Belum Menikah</option>
+                                    <option {{Auth::user()->detail_users->status_perkawinan == 'sudah' ? 'selected' : ''}} value="Menikah">Menikah</option>
+                                    <option {{Auth::user()->detail_users->status_perkawinan == 'pernah' ? 'selected' : ''}} value="Pernah Menikah">Pernah Menikah</option>
                                 </select>
                             </div>
                         </div>
@@ -100,16 +100,16 @@
                                 <label>Dusun</label>
                                 <select name="dusun" class="form-control">
                                     <option>Pilih Dusun</option>
-                                    <option value="Gersikan">Gersikan</option>
-                                    <option value="Ngayunan Barat">Ngayunan Barat</option>
-                                    <option value="Ngayunan Timur">Ngayunan Timur</option>
-                                    <option value="Kedungringin Utara">Kedungringin Utara</option>
-                                    <option value="Kedungringin Tengah">Kedungringin Tengah</option>
-                                    <option value="Kedungringin Selatan">Kedungringin Selatan</option>
-                                    <option value="Guyangan">Guyangan</option>
-                                    <option value="Bahrowo">Bahrowo</option>
-                                    <option value="Balungrejo">Balungrejo</option>
-                                    <option value="Ngampel">Ngampel</option>
+                                    <option {{Auth::user()->detail_users->address == 'Gersikan' ? 'selected' : ''}} value="Gersikan">Gersikan</option>
+                                    <option {{Auth::user()->detail_users->address == 'Ngayunan Barat' ? 'selected' : ''}} value="Ngayunan Barat">Ngayunan Barat</option>
+                                    <option {{Auth::user()->detail_users->address == 'Ngayunan Timur' ? 'selected' : ''}} value="Ngayunan Timur">Ngayunan Timur</option>
+                                    <option {{Auth::user()->detail_users->address == 'Kedungringin Utara' ? 'selected' : ''}} value="Kedungringin Utara">Kedungringin Utara</option>
+                                    <option {{Auth::user()->detail_users->address == 'Kedungringin Tengah' ? 'selected' : ''}} value="Kedungringin Tengah">Kedungringin Tengah</option>
+                                    <option {{Auth::user()->detail_users->address == 'Kedungringin Selatan' ? 'selected' : ''}} value="Kedungringin Selatan">Kedungringin Selatan</option>
+                                    <option {{Auth::user()->detail_users->address == 'Guyangan' ? 'selected' : ''}} value="Guyangan">Guyangan</option>
+                                    <option {{Auth::user()->detail_users->address == 'Bahrowo' ? 'selected' : ''}} value="Bahrowo">Bahrowo</option>
+                                    <option {{Auth::user()->detail_users->address == 'Balungrejo' ? 'selected' : ''}} value="Balungrejo">Balungrejo</option>
+                                    <option {{Auth::user()->detail_users->address == 'Ngampel' ? 'selected' : ''}} value="Ngampel">Ngampel</option>
                                 </select>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                                 <select name="rt" class="form-control">
                                     <option>RT</option>
                                     @for ($i = 1; $i <= 23; $i++)
-                                        <option value="{{$i}}">{{$i}}</option>
+                                        <option {{ Auth::user()->detail_users->rt == $i ? 'selected' : '' }} value="{{$i}}">{{$i}}</option>
                                     @endfor
                                 </select>
                             </div>
@@ -132,7 +132,7 @@
                                 <select name="rw" class="form-control">
                                     <option>RW</option>
                                     @for ($i = 1; $i <= 10; $i++)
-                                        <option value="{{$i}}">{{$i}}</option>
+                                        <option {{ Auth::user()->detail_users->rw == $i ? 'selected' : '' }} value="{{$i}}">{{$i}}</option>
                                     @endfor
                                 </select>
                             </div>
