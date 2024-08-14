@@ -105,6 +105,7 @@ Route::middleware(['auth', 'verified', 'role:staff|admin'])->group(function () {
     Route::get('/pengguna-baru', [UserController::class, 'baru'])->name('pengguna-baru');
     Route::get('/pengguna-baru/{id}', [UserController::class, 'baru_detail'])->name('pengguna-baru.detail');
     Route::post('/pengguna-baru/{id}', [UserController::class, 'baru_konfirmasi'])->name('pengguna-baru.konfirmasi');
+    Route::post('/pengguna-baru/tolak/{id}', [UserController::class, 'baru_tolak'])->name('pengguna-baru.tolak');
 });
 
 require __DIR__.'/auth.php';

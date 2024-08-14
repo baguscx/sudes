@@ -6,7 +6,7 @@
             Lengkapi data diri anda terlebih dahulu sebelum membuat surat.
             <a href="{{route('profile.edit')}}">Klik disini</a>
         </div>
-    @elseif(Auth::user()->detail_users->status_akun == null)
+    @elseif(Auth::user()->detail_users->status_akun == 'Pending')
         <div class="alert alert-warning" role="alert">
             Akun anda sedang ditinjau oleh staff.
         </div>

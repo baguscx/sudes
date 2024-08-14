@@ -44,6 +44,7 @@ class RegisteredUserController extends Controller
 
         DetailUser::create([
             'users_id' => $user->id,
+            'status_akun' => 'Pending',
         ]);
 
         $user->assignRole('warga');

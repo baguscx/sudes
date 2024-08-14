@@ -62,14 +62,45 @@
                                         @endif
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
 
-                        <form action="{{route('pengguna-baru.konfirmasi', $detailuser->id)}}" method="post">
-                            @csrf
-                            <button class="btn btn-success align-item-center"> Setujui Pendaftaran </button>
-                        </form>
+                        <div class="" style="display: flex; gap: 10px">
+                            <form action="{{route('pengguna-baru.konfirmasi', $detailuser->id)}}" method="post">
+                                @csrf
+                                <button class="btn btn-success align-item-center"> Setujui Pendaftaran </button>
+                            </form>
+                            <button class="btn btn-danger align-item-center" data-toggle="modal" data-target="#passwordModal"> Tolak </button>
+
+                    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="passwordModalLabel">Masukkan Alasan</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{route('pengguna-baru.tolak', $detailuser->id)}}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="passwordInput">Alasan</label>
+                                            <input name="ttd" type="text" class="form-control" id="passwordInput" placeholder="Masukkan Alasan">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Konfirmasi</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>

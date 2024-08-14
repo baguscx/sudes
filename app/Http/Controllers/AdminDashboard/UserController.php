@@ -150,7 +150,7 @@ class UserController extends Controller
      */
     public function baru()
     {
-        $detailusers = DetailUser::whereNull('status_akun')->pluck('id');
+        $detailusers = DetailUser::where('status_akun', 'Pending')->pluck('id');
         $users = User::whereIn('id', $detailusers)->get();
         return view('warga.baru.index', compact('users', 'detailusers'));
     }
@@ -168,6 +168,15 @@ class UserController extends Controller
         $detailUser->update(['status_akun' => 'Disetujui']);
 
         Alert::success('Berhasil', 'Pengguna berhasil disetujui');
+        return redirect()->route('pengguna-baru');
+    }
+
+    public function baru_tolak(String $id)
+    {
+        $detailUser = DetailUser::findOrFail($id);
+        $detailUser->update(['status_akun' => 'Ditolak']);
+
+        Alert::success('Berhasil', 'Pengguna berhasil ditolak');
         return redirect()->route('pengguna-baru');
     }
 }

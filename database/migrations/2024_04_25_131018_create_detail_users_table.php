@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('ktp')->nullable();
             $table->string('pekerjaan')->nullable();
             $table->string('kewarganegaraan')->nullable();
-            $table->enum('status_akun', ['Disetujui', 'Ditolak'])->nullable();
+            $table->enum('status_akun', ['Disetujui', 'Ditolak', 'Pending'])->nullable();
             $table->timestamps();
         });
     }

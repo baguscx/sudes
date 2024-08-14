@@ -143,7 +143,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <x-input-label>Berkas Persyaratan (.zip / .rar) : </x-input-label>
+                                <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a href="#">Lihat Syarat</a> ]]</x-input-label>
                                 <x-text-input value="{{ old('berkas') }}" name="berkas" type="file" class="form-control" />
                                 <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
                             </div>

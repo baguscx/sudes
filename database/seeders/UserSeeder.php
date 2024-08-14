@@ -51,6 +51,7 @@ class UserSeeder extends Seeder
         ])->assignRole('warga');
         DetailUser::create([
             'users_id' => $warga->id,
+            'status_akun' => 'Pending',
         ]);
     }
 }
