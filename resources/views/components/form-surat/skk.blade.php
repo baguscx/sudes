@@ -151,14 +151,15 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a href="#">Lihat Syarat</a> ]]</x-input-label>
+                                <x-input-label>Berkas Persyaratan (.zip / .rar) : [[ <a data-toggle="modal" data-target="#passwordModal1" href="#">Lihat Syarat</a> ]]</x-input-label>
                                 <x-text-input value="{{ old('berkas') }}" name="berkas" type="file" class="form-control" />
                                 <x-input-error class="mt-2" :messages="$errors->get('berkas')" />
                             </div>
                         </div>
 
                     </div>
-                </section>
+                    </section>
+
 
                 <h6>Telah meninggal pada :</h6>
                 <section>
@@ -202,6 +203,24 @@
                         </div>
                     </div>
                 </section>
+
+                <div class="modal fade" id="passwordModal1" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="passwordModalLabel">Berkas Persyaratan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                - Kartu Tanda Penduduk
+                                <br>
+                                - Kartu Keluarga
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
         </div>
     </form>
