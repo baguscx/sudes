@@ -24,6 +24,7 @@
                         @endif
                     </form> --}}
                     <button data-toggle="modal" data-target="#passwordModal" class="btn btn-primary btn-block mb-2">Tanda Tangani</button>
+                    <button data-toggle="modal" data-target="#passwordModal1" class="btn btn-danger btn-block mb-2">Tolak</button>
                     <br>
                     {{-- <form action="{{route('kades.pengajuan.rej', $list->id)}}" method="post">
                         @csrf
@@ -56,6 +57,31 @@
                         <div class="form-group">
                             <label for="passwordInput">Password</label>
                             <input name="ttd" type="password" class="form-control" id="passwordInput" placeholder="Masukkan password">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Konfirmasi</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="passwordModal1" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">Alasan Ditolak</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('kades.pengajuan.tolak', $ps->id)}}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <input name="keterangan" type="" class="form-control" placeholder="Masukkan Keterangan">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

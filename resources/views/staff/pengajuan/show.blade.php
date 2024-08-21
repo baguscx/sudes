@@ -51,5 +51,4 @@
             document.getElementById("note").style.display = "block";
         }
     }
-
 </script>

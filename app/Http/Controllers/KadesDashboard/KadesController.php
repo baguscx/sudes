@@ -132,4 +132,13 @@ class KadesController extends Controller
         Alert::success('Sukses!', 'Surat Berhasil Ditandatangani');
         return redirect()->route('kades.pengajuan.list');
     }
+
+    public function tolak(String $id, Request $request){
+        $pengajuanSurat = PengajuanSurat::where('id', $id)->first();
+        $pengajuanSurat->keterangan = $request->keterangan;
+        $pengajuanSurat->status = 'Ditolak';
+        $pengajuanSurat->save();
+        Alert::success('Sukses!', 'Surat Berhasil ditolak');
+        return redirect(route('kades.pengajuan.reject'));
+    }
 }
