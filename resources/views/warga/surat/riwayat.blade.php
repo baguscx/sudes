@@ -80,6 +80,11 @@
                                             </div>
                                         </div> --}}
                                     </td>
+
+                                @elseif ($pengajuan->status == 'Expired')
+                                <td class="text-danger">
+                                    <span class="badge badge-danger">Expired</span>
+                                </td>
                                 @endif
                             </tr>
                             @endforeach

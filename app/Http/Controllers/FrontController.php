@@ -19,6 +19,16 @@ class FrontController extends Controller
         $list = DetailSurat::where('id', $id)->first();
         $user = User::where('id', $list->users_id)->first();
         $ps = PengajuanSurat::where('id', $list->pengajuan_surat_id)->first();
+
+    if (\Carbon\Carbon::parse($ps->created_at)->addMinutes(1)->isPast()) {
+
+        $list->berkas = null;
+        $list->save();
+
+        $ps->status = 'Expired';
+        $ps->save();
+    }
+
         return view('front.cek', compact('list', 'user', 'ps'));
     }
 

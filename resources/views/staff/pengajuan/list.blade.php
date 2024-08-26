@@ -40,6 +40,10 @@
                                             <td class="text-danger">
                                                 <span class="badge badge-danger">Ditolak</span>
                                             </td>
+                                        @elseif ($pengajuan->status == 'Expired')
+                                            <td class="text-danger">
+                                                <span class="badge badge-danger">Expired</span>
+                                            </td>
                                         @elseif ($pengajuan->status == 'Dikonfirmasi')
                                             <td class="text-primary">
                                                 <span class="badge badge-primary">Ttd</span>

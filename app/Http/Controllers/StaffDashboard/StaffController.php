@@ -64,17 +64,24 @@ class StaffController extends Controller
         public function list()
     {
         $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
-                            ->whereIn('status', ['Dikonfirmasi', 'Ditolak', 'Selesai'])
+                            ->whereIn('status', ['Dikonfirmasi', 'Ditolak', 'Selesai', 'Expired'])
                             ->get();
 
         return view('staff.pengajuan.list', compact('pengajuanSurat'));
     }
 
-    public function berkas($id){
-            // Cari detail surat berdasarkan ID
-        $detailSurat = DetailSurat::findOrFail($id);
+public function berkas($id){
+    // Cari detail surat berdasarkan ID
+    $detailSurat = DetailSurat::find($id);
 
-        // Unduh berkas menggunakan response()->download()
-        return response()->download(storage_path('app/public/' . $detailSurat->berkas));
+    // Cek apakah data ditemukan
+    if (!$detailSurat || !$detailSurat->berkas) {
+        // Jika data tidak ditemukan atau berkas null, redirect ke route 'staff.pengajuan.list'
+        return redirect()->route('staff.pengajuan.list')->with('error', 'Data tidak ditemukan atau berkas kosong.');
     }
+
+    // Unduh berkas menggunakan response()->download()
+    return response()->download(storage_path('app/public/' . $detailSurat->berkas));
+}
+
 }

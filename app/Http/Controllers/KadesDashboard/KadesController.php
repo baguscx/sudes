@@ -84,7 +84,7 @@ class KadesController extends Controller
         public function list()
     {
         $pengajuanSurat = PengajuanSurat::with(['users', 'detail_surats'])
-                            ->whereIn('status', ['Selesai'])
+                            ->whereIn('status', ['Selesai', 'Expired'])
                             ->latest()->get();
 
         return view('kades.pengajuan.list', compact('pengajuanSurat'));

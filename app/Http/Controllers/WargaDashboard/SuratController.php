@@ -323,7 +323,8 @@ class SuratController extends Controller
 
     public function riwayat()
     {
-        $pengajuanSurat = PengajuanSurat::where('users_id', Auth::user()->id)->whereIn('status', ['Diproses', 'Dikonfirmasi', 'Selesai', 'Ditolak'])->with('detail_surats')->latest()->get();
+        $pengajuanSurat = PengajuanSurat::where('users_id', Auth::user()->id)->whereIn('status', ['Diproses', 'Dikonfirmasi', 'Selesai', 'Ditolak', 'Expired'])->with('detail_surats')->latest()->get();
+
         return view('warga.surat.riwayat', compact( 'pengajuanSurat'));
     }
 
