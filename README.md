@@ -1,7 +1,7 @@
 
 # Sudes - Surat Desa
 
-Project berfungsi untuk pelayanan surat administrasi desa. Dibuat oleh [Bagus Cahyono](https://github.com/baguscx/). Jangan lupa beri ⭐ ya!
+Project berfungsi untuk pelayanan surat desa. Dibuat oleh [Bagus Cahyono](https://github.com/baguscx/). Jangan lupa beri ⭐ ya!
 
 
 
